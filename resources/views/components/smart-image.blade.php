@@ -27,4 +27,6 @@
 <img src="{{ $imageUrl }}" 
      alt="{{ $alt }}" 
      class="{{ $class }}" 
+     loading="lazy"
+     decoding="async"
      onerror="this.src='{{ $fallback }}'" />

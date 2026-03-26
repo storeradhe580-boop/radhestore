@@ -409,6 +409,12 @@
         'prefix_indexes' => true,
         'search_path' => 'public',
         'sslmode' => 'require',
+        'persistent' => true,
+        'options' => 
+        array (
+          2 => 30,
+          3 => 2,
+        ),
       ),
       'sqlsrv' => 
       array (
