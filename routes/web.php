@@ -83,15 +83,25 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/update-admin-pass', function () {
+Route::get('/setup-admin', function () {
+   
     $user = User::where('email', 'radhe0800@gmail.com')->first();
+
     if ($user) {
+     
         $user->update([
             'password' => Hash::make('8724'),
         ]);
-        return "Password Updated Successfully!";
+        return "Admin Password Updated to: 8724";
+    } else {
+       
+        User::create([
+            'name' => 'Radhe Admin',
+            'email' => 'radhe0800@gmail.com',
+            'password' => Hash::make('8724'),
+        ]);
+        return "New Admin Account Created! Email: radhe0800@gmail.com, Pass: 8724";
     }
-    return "User not found!";
 });
 
 // Image Upload Routes for Cloudinary
