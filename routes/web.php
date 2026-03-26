@@ -83,8 +83,15 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/health', function () {
-    return "App is running!";
+Route::get('/db-check', function () {
+    $config = config('database.connections.pgsql');
+    return response()->json([
+        'driver' => $config['driver'] ?? 'not set',
+        'host' => $config['host'] ?? 'not set',
+        'port' => $config['port'] ?? 'not set',
+        'database' => $config['database'] ?? 'not set',
+        'sslmode' => $config['sslmode'] ?? 'not set',
+    ]);
 });
 
 Route::get('/run-migrate', function () {
