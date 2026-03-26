@@ -23,7 +23,7 @@ WORKDIR /var/www
 COPY composer.json composer.lock ./
 
 # Dependencies ઇન્સ્ટોલ કરો (વધારે મેમરી ન વપરાય તે માટેના ઓપ્શન્સ સાથે)
-RUN composer install --no-scripts --no-autoloader --no-interaction --no-dev
+RUN composer install --no-scripts --no-autoloader --no-interaction --no-dev --ignore-platform-reqs
 
 # હવે બાકીનો બધો કોડ કોપી કરો
 COPY . .
