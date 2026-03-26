@@ -19,9 +19,19 @@ use App\Http\Controllers\OrderTrackController;
 use App\Http\Controllers\ImageUploadController;
 
 Route::get('/', function () {
-    $categories = Category::latest()->limit(8)->get();
-    $products = Product::latest()->limit(12)->get(); // Fetch limited products for better performance
-    $banners = Slider::latest()->limit(5)->get(); // Fetch limited banners for main banner
+    // Cache queries for 60 minutes to reduce database load
+    $categories = cache()->remember('home_categories', 60, function () {
+        return Category::latest()->limit(8)->get();
+    });
+    
+    $products = cache()->remember('home_products', 60, function () {
+        return Product::latest()->limit(12)->get();
+    });
+    
+    $banners = cache()->remember('home_banners', 60, function () {
+        return Slider::latest()->limit(5)->get();
+    });
+    
     return view('welcome', compact('categories', 'products', 'banners'));
 })->name('home');
 

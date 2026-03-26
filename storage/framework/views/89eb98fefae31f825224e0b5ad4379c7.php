@@ -11,7 +11,7 @@
                     <div class="relative w-full min-h-[500px]">
                         <!-- Background Image -->
                         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($banner->image): ?>
-                            <img src="<?php echo e(asset('storage/' . $banner->image)); ?>" 
+                            <img src="<?php echo e(asset('storage/' . $banner->image)); ?>" loading="lazy" decoding="async" 
                                  class="absolute inset-0 w-full h-full object-cover" alt="<?php echo e($banner->title); ?>">
                         <?php else: ?>
                             <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=600" 
@@ -107,7 +107,7 @@
                         <div class="flex items-center justify-center lg:justify-end px-6 sm:px-12 lg:px-20 py-12 lg:py-0">
                             <div class="w-full max-w-md lg:max-w-lg">
                                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($banner->image): ?>
-                                    <img src="<?php echo e(asset('storage/' . $banner->image)); ?>" 
+                                    <img src="<?php echo e(asset('storage/' . $banner->image)); ?>" loading="lazy" decoding="async" 
                                          class="w-full h-auto object-cover rounded-lg shadow-lg" alt="<?php echo e($banner->title); ?>">
                                 <?php else: ?>
                                     <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=600" 
@@ -151,7 +151,7 @@
                 <a href="<?php echo e(route('category.show', $category->slug)); ?>" class="group no-underline block text-center">
                     <div class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden bg-[#FCF9F5] border border-black/5 mb-3 mx-auto group-hover:shadow-lg transition-all duration-300">
                         <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($category->image): ?>
-                            <img src="<?php echo e(asset('storage/' . $category->image)); ?>" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="<?php echo e($category->name); ?>">
+                            <img src="<?php echo e(asset('storage/' . $category->image)); ?>" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="<?php echo e($category->name); ?>">
                         <?php else: ?>
                             <div class="w-full h-full flex items-center justify-center text-black/20">
                                 <i class="bi bi-grid-3x3-gap text-2xl md:text-3xl"></i>
@@ -179,7 +179,7 @@
                 <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php $__currentLoopData = $products->take(12); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500 border border-black/5 group">
                         <div class="h-48 md:h-56 overflow-hidden relative">
-                            <img src="<?php echo e($product->image ? asset('storage/' . $product->image) : 'https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=1000'); ?>" 
+                            <img src="<?php echo e($product->image ? asset('storage/' . $product->image) : 'https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=1000'); ?>" loading="lazy" decoding="async" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="<?php echo e($product->name); ?>">
                             
                             <?php if(\Livewire\Mechanisms\ExtendBlade\ExtendBlade::isRenderingLivewireComponent()): ?><!--[if BLOCK]><![endif]--><?php endif; ?><?php if($product->categoryRel): ?>

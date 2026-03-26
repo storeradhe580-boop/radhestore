@@ -16,6 +16,8 @@
                 <a href="{{ route('home') }}" class="flex items-center justify-center no-underline group">
                     <img src="{{ asset('images/logo/logo (2).jpeg') }}" 
                          alt="Radhe Store" 
+                         loading="eager"
+                         decoding="async"
                          class="h-10 w-auto object-contain group-hover:opacity-80 transition-opacity duration-300"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <!-- Fallback to text logo if image fails to load -->
@@ -48,6 +50,8 @@
                 <a href="{{ route('home') }}" class="flex items-center gap-3 no-underline group">
                     <img src="{{ asset('images/logo/logo (2).jpeg') }}" width="250"
                          alt="Radhe Store" 
+                         loading="eager"
+                         decoding="async"
                          class="h-16 w-auto object-contain group-hover:scale-105 transition-transform duration-300 max-w-[140px] md:max-w-[180px]"
                          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                     <!-- Radhe Store Text -->

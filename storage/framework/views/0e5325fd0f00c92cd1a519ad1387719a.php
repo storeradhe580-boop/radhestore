@@ -60,5 +60,7 @@ unset($__defined_vars, $__key, $__value); ?>
 <img src="<?php echo e($imageUrl); ?>" 
      alt="<?php echo e($alt); ?>" 
      class="<?php echo e($class); ?>" 
+     loading="lazy"
+     decoding="async"
      onerror="this.src='<?php echo e($fallback); ?>'" />
 <?php /**PATH E:\radhe-shop\radhe-shop\resources\views\components\smart-image.blade.php ENDPATH**/ ?>
