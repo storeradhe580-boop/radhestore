@@ -96,6 +96,11 @@ Route::get('/db-check', function () {
 
 Route::get('/run-migrate', function () {
     try {
+        // Force internal host for Render connection
+        config(['database.connections.pgsql.host' => 'dpg-d72ghbh9fqoc73a9f3f0-a']);
+        \DB::purge('pgsql');
+        \DB::reconnect('pgsql');
+        
         Artisan::call('migrate', ['--force' => true]);
         return "Migration Successful!";
     } catch (Exception $e) {
