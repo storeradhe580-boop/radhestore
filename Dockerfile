@@ -1,7 +1,7 @@
-# PHP 8.2 ની જગ્યાએ 8.4 વાપરો
+# PHP 8.4 વાપરો
 FROM php:8.4-cli
 
-# બાકીનો બધો કોડ જેવો હતો એવો જ રહેવા દો...
+# સિસ્ટમ લાઈબ્રેરીઓ
 RUN apt-get update && apt-get install -y \
     unzip git curl libpng-dev libonig-dev libxml2-dev zip libpq-dev
 
@@ -15,11 +15,12 @@ WORKDIR /var/www
 
 COPY composer.json composer.lock ./
 
-# અહીં પણ --ignore-platform-reqs રાખજો જ
+# Dependencies ઇન્સ્ટોલ કરો
 RUN composer install --no-scripts --no-autoloader --no-interaction --no-dev --ignore-platform-reqs
 
 COPY . .
 
+# Permissions અને ફોલ્ડર્સ સેટ કરો
 RUN mkdir -p storage/framework/cache/data \
     storage/framework/app/cache \
     storage/framework/sessions \
@@ -28,9 +29,10 @@ RUN mkdir -p storage/framework/cache/data \
     && chown -R www-data:www-data /var/www \
     && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 
-# હવે આ કમાન્ડ એરર વગર ચાલશે
+# Autoloader રન કરો
 RUN composer dump-autoload --optimize --ignore-platform-reqs
 
 EXPOSE 10000
 
-CMD php artisan serve --host=0.0.0.0 --port=10000
+# --- અહીં ફેરફાર કર્યો છે: પહેલા Migration રન થશે અને પછી Serve થશે ---
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000
