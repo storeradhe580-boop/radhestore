@@ -17,48 +17,31 @@ services:
       - key: APP_ENV
         value: production
       - key: APP_DEBUG
-        value: false
+        value: true
       - key: APP_KEY
         generateValue: true
       - key: APP_URL
-        value: https://radhe-store.onrender.com
+        value: https://radhestore-dhiu.onrender.com
       - key: DB_CONNECTION
-        value: mysql
+        value: pgsql
       - key: DB_HOST
-        value: localhost
+        value: dpg-d72ghbh9fqoc73a9f3f0-a.postgres.render.com
       - key: DB_PORT
-        value: 3306
+        value: 5432
       - key: DB_DATABASE
-        value: radhe_store
+        value: radhestore_a9ag
       - key: DB_USERNAME
-        value: render
+        value: radhestore_a9ag_user
       - key: DB_PASSWORD
-        generateValue: true
+        value: GTXaad5jo6P6EUbd8wKB7e9VfiWsNbgS
       - key: CACHE_DRIVER
-        value: redis
+        value: file
       - key: SESSION_DRIVER
-        value: redis
+        value: file
       - key: QUEUE_CONNECTION
-        value: redis
+        value: sync
       - key: PORT
         value: 10000
-
-  # MySQL Database
-  - type: pserv
-    name: mysql
-    env: mysql
-    plan: free
-    stateful: true
-    
-    envVars:
-      - key: MYSQL_DATABASE
-        value: radhe_store
-      - key: MYSQL_USER
-        value: render
-      - key: MYSQL_PASSWORD
-        generateValue: true
-      - key: MYSQL_ROOT_PASSWORD
-        generateValue: true
 
   # Redis Cache
   - type: pserv
