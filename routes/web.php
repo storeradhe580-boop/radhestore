@@ -83,6 +83,11 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/run-migrate', function () {
+    Artisan::call('migrate --force');
+    return "Migration Successful!";
+});
+
 Route::get('/setup-admin', function () {
    
     $user = User::where('email', 'radhe0800@gmail.com')->first();
