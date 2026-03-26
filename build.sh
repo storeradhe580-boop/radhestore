@@ -11,6 +11,7 @@ composer install --no-dev --optimize-autoloader
 
 # Cache Laravel configuration
 echo "⚙️ Caching Laravel configuration..."
+php artisan config:clear
 php artisan config:cache
 
 # Cache Laravel routes
