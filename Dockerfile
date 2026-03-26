@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     libpq-dev
 
-# PHP Extensions ઇન્સ્ટોલ કરો (PostgreSQL માટે pdo_pgsql ઉમેર્યું છે)
+# PHP Extensions ઇન્સ્ટોલ કરો
 RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
 
 # Composer મેળવો
@@ -19,20 +19,26 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
-# પહેલા ફક્ત composer ફાઈલો કોપી કરો (આનાથી સ્પીડ વધશે)
+# પહેલા composer ફાઈલો કોપી કરો
 COPY composer.json composer.lock ./
 
-# Dependencies ઇન્સ્ટોલ કરો (વધારે મેમરી ન વપરાય તે માટેના ઓપ્શન્સ સાથે)
+# Dependencies ઇન્સ્ટોલ કરો
 RUN composer install --no-scripts --no-autoloader --no-interaction --no-dev --ignore-platform-reqs
 
 # હવે બાકીનો બધો કોડ કોપી કરો
 COPY . .
 
+# --- આ ભાગ સૌથી મહત્વનો છે (Error સોલ્વ કરવા માટે) ---
+RUN mkdir -p /var/www/storage/framework/cache/data \
+    && mkdir -p /var/www/storage/framework/app/cache \
+    && mkdir -p /var/www/storage/framework/sessions \
+    && mkdir -p /var/www/storage/framework/views \
+    && mkdir -p /var/www/bootstrap/cache \
+    && chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache \
+    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+
 # Autoloader ફાઈનલ કરો
 RUN composer dump-autoload --optimize
-
-# Permissions આપો (Render માટે જરૂરી છે)
-RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 
 # પોર્ટ સેટ કરો
 EXPOSE 10000
