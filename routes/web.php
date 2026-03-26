@@ -19,9 +19,9 @@ use App\Http\Controllers\OrderTrackController;
 use App\Http\Controllers\ImageUploadController;
 
 Route::get('/', function () {
-    $categories = Category::latest()->get();
-    $products = Product::latest()->get(); // Fetch all products for continuous slider
-    $banners = Slider::latest()->get(); // Fetch banners for main banner
+    $categories = Category::latest()->limit(8)->get();
+    $products = Product::latest()->limit(12)->get(); // Fetch limited products for better performance
+    $banners = Slider::latest()->limit(5)->get(); // Fetch limited banners for main banner
     return view('welcome', compact('categories', 'products', 'banners'));
 })->name('home');
 
@@ -81,7 +81,7 @@ Route::post('/contact', [ContactController::class, 'store'])->name('contact.stor
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home.dashboard');
 
 Route::get('/db-check', function () {
     $config = config('database.connections.pgsql');
