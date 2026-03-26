@@ -84,7 +84,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/run-migrate', function () {
-    Artisan::call('migrate --force');
+    Artisan::call('migrate', ['--force' => true]);
     return "Migration Successful!";
 });
 
