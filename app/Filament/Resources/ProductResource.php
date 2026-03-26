@@ -73,15 +73,14 @@ class ProductResource extends Resource
                     Section::make()
                         ->schema([
                             FileUpload::make('image')
-                                ->label('Upload images')
-                                ->image()
-                                ->disk(env('APP_ENV') === 'production' ? 'cloudinary' : 'public')
-                                ->directory('products')
-                                ->visibility('public')
-                                ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png'])
-                                ->maxSize(2048)
-                                ->required(),
-
+                            ->label('Upload images')
+                            ->image()
+                            ->disk('public') // 👈 FIX
+                            ->directory('products')
+                            ->visibility('public')
+                            ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png'])
+                            ->maxSize(2048)
+                            ->required(),
                             Grid::make(2)->schema([
                                 TextInput::make('regular_price')
                                     ->numeric()
