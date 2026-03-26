@@ -83,6 +83,10 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/health', function () {
+    return "App is running!";
+});
+
 Route::get('/run-migrate', function () {
     Artisan::call('migrate', ['--force' => true]);
     return "Migration Successful!";
