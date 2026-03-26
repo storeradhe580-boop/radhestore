@@ -88,8 +88,12 @@ Route::get('/health', function () {
 });
 
 Route::get('/run-migrate', function () {
-    Artisan::call('migrate', ['--force' => true]);
-    return "Migration Successful!";
+    try {
+        Artisan::call('migrate', ['--force' => true]);
+        return "Migration Successful!";
+    } catch (Exception $e) {
+        return "Migration Error: " . $e->getMessage();
+    }
 });
 
 Route::get('/setup-admin', function () {
