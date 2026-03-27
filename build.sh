@@ -9,14 +9,24 @@ echo "🚀 Starting Laravel build process..."
 echo "📦 Installing Composer dependencies..."
 composer install --no-dev --optimize-autoloader
 
+# Clear all caches first (prevents stale cache issues)
+echo "🧹 Clearing all caches..."
+php artisan cache:clear
+php artisan config:clear
+php artisan route:clear
+php artisan view:clear
+
 # Cache Laravel configuration
 echo "⚙️ Caching Laravel configuration..."
-php artisan config:clear
 php artisan config:cache
 
 # Cache Laravel routes
 echo "🛣️ Caching Laravel routes..."
 php artisan route:cache
+
+# Cache views
+echo "👁️ Caching views..."
+php artisan view:cache
 
 # Install Node.js dependencies
 echo "📦 Installing Node.js dependencies..."
@@ -28,7 +38,7 @@ npm run build
 
 # Create storage link if not exists
 echo "🔗 Creating storage link..."
-php artisan storage:link
+php artisan storage:link --force
 
 # Set proper permissions
 echo "🔐 Setting file permissions..."
