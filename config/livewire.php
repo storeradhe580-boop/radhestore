@@ -63,7 +63,17 @@ return [
     |
     */
     'temporary_file_upload' => [
-    'disk' => 'public',
+        'disk' => null, // Use default disk (local for tmp)
+        'rules' => ['file', 'mimes:jpeg,png,jpg,gif,webp', 'max:5120'],
+        'directory' => 'livewire-tmp',
+        'middleware' => ['web'], // Use web middleware only - CSRF handled by Livewire
+        'preview_mimes' => [
+            'image/jpeg',
+            'image/png',
+            'image/gif',
+            'image/webp',
+        ],
+        'max_upload_time' => 5,
     ],
     /*
     |---------------------------------------------------------------------------
