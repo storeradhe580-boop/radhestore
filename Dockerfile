@@ -1,38 +1,32 @@
-# PHP 8.4 વાપરો
-FROM php:8.4-cli
+FROM php:8.4-apache
 
-# સિસ્ટમ લાઈબ્રેરીઓ
 RUN apt-get update && apt-get install -y \
-    unzip git curl libpng-dev libonig-dev libxml2-dev zip libpq-dev
+    libpng-dev \
+    libjpeg-dev \
+    libfreetype6-dev \
+    zip unzip git libpq-dev libicu-dev libzip-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd pdo pdo_mysql pdo_pgsql intl bcmath zip
 
-# PHP Extensions
-RUN docker-php-ext-install pdo pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
+ENV APACHE_DOCUMENT_ROOT /var/www/html/public
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/000-default.conf
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
-# Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN a2enmod rewrite
 
-WORKDIR /var/www
-
-COPY composer.json composer.lock ./
-
-# Dependencies ઇન્સ્ટોલ કરો
-RUN composer install --no-scripts --no-autoloader --no-interaction --no-dev --ignore-platform-reqs
-
+WORKDIR /var/www/html
 COPY . .
 
-# Permissions અને ફોલ્ડર્સ સેટ કરો
-RUN mkdir -p storage/framework/cache/data \
-    storage/framework/app/cache \
-    storage/framework/sessions \
-    storage/framework/views \
-    bootstrap/cache \
-    && chown -R www-data:www-data /var/www \
-    && chmod -R 775 /var/www/storage /var/www/bootstrap/cache
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
-# Autoloader રન કરો
-RUN composer dump-autoload --optimize --ignore-platform-reqs
+RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
+
+RUN php artisan storage:link || true
+RUN php artisan filament:assets || true
+
+RUN chown -R www-data:www-data storage bootstrap/cache
+RUN chmod -R 775 storage bootstrap/cache
 
 EXPOSE 10000
 
-# --- અહીં ફેરફાર કર્યો છે: પહેલા Migration રન થશે અને પછી Serve થશે ---
-CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=10000
+CMD php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=${PORT:-10000}
