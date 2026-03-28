@@ -8,16 +8,15 @@ class Slider extends Model
 {
     protected $fillable = [
         'title', 
-        'line_1', 
-        'line_2', 
         'image', 
-        'inset_image', 
-        'icon',
-        'is_published',
-        'sort_order'
+        'status',
     ];
     
     protected $casts = [
-        'is_published' => 'boolean',
+        'status' => 'boolean',
+    ];
+    
+    protected $attributes = [
+        'status' => true,
     ];
 }

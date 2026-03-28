@@ -60,24 +60,17 @@ class HomeController extends Controller
     }
     
     /**
-     * Get sliders with fallback for missing columns
+     * Get sliders with fallback for missing status column
      */
     private function getSliders()
     {
         $query = Slider::query();
         
-        // Only filter by is_published if column exists
-        if (Schema::hasColumn('sliders', 'is_published')) {
-            $query->where('is_published', true);
+        // Only filter by status if column exists
+        if (Schema::hasColumn('sliders', 'status')) {
+            $query->where('status', true);
         }
         
-        // Only order by sort_order if column exists
-        if (Schema::hasColumn('sliders', 'sort_order')) {
-            $query->orderBy('sort_order');
-        } else {
-            $query->latest();
-        }
-        
-        return $query->take(5)->get();
+        return $query->latest()->take(5)->get();
     }
 }

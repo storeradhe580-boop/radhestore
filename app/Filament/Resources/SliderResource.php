@@ -31,48 +31,24 @@ class SliderResource extends Resource
         return $form
         ->schema([
             TextInput::make('title')
-                ->required(),
-            
-            TextInput::make('line_1')
                 ->required()
-                ->label('Line 1'),
-
-            TextInput::make('line_2')
-                ->required()
-                ->label('Line 2'),
+                ->label('Slider Title'),
 
             FileUpload::make('image')
-                ->label('Slider Background Image')
+                ->label('Slider Image')
                 ->image()
                 ->disk('cloudinary')
                 ->directory('sliders')
                 ->visibility('public')
                 ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                 ->maxSize(5120)
-                ->helperText('Upload banner background image. Max size: 5MB')
+                ->helperText('Upload slider banner image. Max size: 5MB')
                 ->required(),
 
-            FileUpload::make('inset_image')
-                ->label('Slider Inset Image (Product)')
-                ->image()
-                ->disk('cloudinary')
-                ->directory('sliders')
-                ->visibility('public')
-                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
-                ->maxSize(5120)
-                ->helperText('Upload product inset image. Max size: 5MB')
-                ->nullable(),
-
-            Toggle::make('is_published')
-                ->label('Published')
+            Toggle::make('status')
+                ->label('Active')
                 ->default(true)
                 ->helperText('Show this slider on homepage'),
-
-            TextInput::make('sort_order')
-                ->label('Sort Order')
-                ->numeric()
-                ->default(0)
-                ->helperText('Lower numbers appear first'),
         ])->columns(1);
     }
 
@@ -83,31 +59,19 @@ class SliderResource extends Resource
                 // ૧. આઈડી
             TextColumn::make('id')->label('ID')->sortable(),
 
-            // ૨. ઈમેજ (જો સ્લાઈડરમાં ફોટો હોય તો)
             ImageColumn::make('image')
                 ->label('Image')
                 ->disk('cloudinary')
                 ->url(fn ($record) => $record->image)
                 ->size(60),
 
-            ImageColumn::make('inset_image')
-                ->label('Inset')
-                ->disk('cloudinary')
-                ->url(fn ($record) => $record->inset_image)
-                ->size(40),
-
-            // ૩. ટાઈટલ
             TextColumn::make('title')
                 ->label('Title')
                 ->searchable(),
 
-            TextColumn::make('sort_order')
-                ->label('Order')
-                ->sortable(),
-
-            Tables\Columns\IconColumn::make('is_published')
+            Tables\Columns\IconColumn::make('status')
                 ->boolean()
-                ->label('Published'),
+                ->label('Active'),
             ])
             ->filters([
                 //
