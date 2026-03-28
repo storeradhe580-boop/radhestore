@@ -13,30 +13,31 @@ return [
     |
     */
 
-   'default' => env('APP_ENV') === 'production' ? 'cloudinary' : 'public',
+    'default' => env('APP_ENV') === 'production' ? 'cloudinary' : 'public',
 
-'disks' => [
+    'disks' => [
 
-    'local' => [
-        'driver' => 'local',
-        'root' => storage_path('app/private'),
+        'local' => [
+            'driver' => 'local',
+            'root' => storage_path('app/private'),
+        ],
+
+        'public' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'cloudinary' => [
+            'driver' => 'cloudinary',
+            'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
+            'api_key' => env('CLOUDINARY_API_KEY'),
+            'api_secret' => env('CLOUDINARY_API_SECRET'),
+            'url' => env('CLOUDINARY_URL'),
+        ],
+
     ],
-
-    'public' => [
-        'driver' => 'local',
-        'root' => storage_path('app/public'),
-        'url' => env('APP_URL').'/storage',
-        'visibility' => 'public',
-    ],
-
-    'cloudinary' => [
-        'driver' => 'cloudinary',
-        'cloud_name' => env('CLOUDINARY_CLOUD_NAME'),
-        'api_key' => env('CLOUDINARY_API_KEY'),
-        'api_secret' => env('CLOUDINARY_API_SECRET'),
-        'url' => env('CLOUDINARY_URL'),
-    ],
-],
     /*
     |--------------------------------------------------------------------------
     | Symbolic Links

@@ -2,7 +2,7 @@
 
 if (!function_exists('getImageUrl')) {
     /**
-     * Get the proper image URL based on environment and storage type.
+     * Get the image URL (Cloudinary stores full URLs).
      *
      * @param string|null $imagePath
      * @return string|null
@@ -13,17 +13,8 @@ if (!function_exists('getImageUrl')) {
             return null;
         }
         
-        // For production, check if it's a Cloudinary URL (starts with http)
-        if (app()->environment('production')) {
-            if (str_starts_with($imagePath, 'http')) {
-                return $imagePath; // Cloudinary URL
-            }
-            // Fallback for local storage in production (shouldn't happen)
-            return asset('storage/' . $imagePath);
-        }
-        
-        // For local development, always use storage path
-        return asset('storage/' . $imagePath);
+        // Cloudinary stores full URLs, so return as-is
+        return $imagePath;
     }
 }
 
