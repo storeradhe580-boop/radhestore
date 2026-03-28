@@ -16,20 +16,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Fetch active categories with images
-        $categories = Category::where('status', true)
-            ->whereNotNull('image')
+        // TEMPORARY: Fetch all data without status filters (columns don't exist yet)
+        $categories = Category::whereNotNull('image')
             ->orderBy('name')
             ->get();
         
-        // Fetch featured products (temporary - without status filter)
         $products = Product::latest()
             ->take(12)
             ->get();
         
-        // Fetch active banners/sliders
-        $banners = Slider::where('is_published', true)
-            ->orderBy('sort_order')
+        $banners = Slider::orderBy('sort_order')
             ->take(5)
             ->get();
         
