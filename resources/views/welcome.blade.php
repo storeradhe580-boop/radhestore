@@ -136,6 +136,40 @@
     </section>
     @endif
 
+    {{-- Categories Section --}}
+    @if($categories->count() > 0)
+    <section class="py-10 bg-white">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <p class="text-[10px] tracking-[0.25em] uppercase text-[#D4AF37] font-bold mb-2">Explore</p>
+                <h2 class="serif text-2xl md:text-3xl text-[#2b0505] mb-2">Shop by Category</h2>
+                <p class="text-sm text-black/50">Browse our traditional collections</p>
+            </div>
+
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 md:gap-6">
+                @foreach($categories as $category)
+                    <a href="{{ route('shop.index', ['category' => $category->slug]) }}" class="group text-center">
+                        <div class="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 rounded-full overflow-hidden border-2 border-[#D4AF37]/20 group-hover:border-[#D4AF37] transition-all duration-300 shadow-md group-hover:shadow-lg">
+                            @if($category->image)
+                                <img src="{{ $category->image }}" 
+                                     alt="{{ $category->name }}" 
+                                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            @else
+                                <div class="w-full h-full bg-gradient-to-br from-[#D4AF37]/20 to-[#D4AF37]/40 flex items-center justify-center">
+                                    <span class="text-[#D4AF37] text-xl font-serif">{{ substr($category->name, 0, 1) }}</span>
+                                </div>
+                            @endif
+                        </div>
+                        <h3 class="text-xs md:text-sm font-medium text-[#2b0505] group-hover:text-[#D4AF37] transition-colors line-clamp-1">
+                            {{ $category->name }}
+                        </h3>
+                    </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
     <section class="py-8 bg-[#FCF9F5]">
         <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
