@@ -63,12 +63,10 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Image')
+                    ->disk('public')
                     ->circular()
-                    ->defaultImageUrl('https://res.cloudinary.com/demo/image/upload/v1/default-placeholder.jpg')
-                    ->url(fn ($record) => $record->image 
-                        ? asset($record->image) 
-                        : 'https://res.cloudinary.com/demo/image/upload/v1/default-placeholder.jpg'
-                    ),
+                    ->defaultImageUrl('https://ui-avatars.com/api/?name=Category&background=e5e7eb&color=6b7280')
+                    ->size(50),
 
                 Tables\Columns\TextColumn::make('name')
                     ->label('Category Name')
