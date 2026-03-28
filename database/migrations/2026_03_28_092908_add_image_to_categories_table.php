@@ -12,9 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('categories', function (Blueprint $table) {
+            // Add image column if it doesn't exist
             if (!Schema::hasColumn('categories', 'image')) {
                 $table->string('image')->nullable()->after('slug');
             }
+            
+            // Add status column if it doesn't exist
             if (!Schema::hasColumn('categories', 'status')) {
                 $table->boolean('status')->default(true)->after('image');
             }

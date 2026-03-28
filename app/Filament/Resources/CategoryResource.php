@@ -25,13 +25,18 @@ class CategoryResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Category Name')
                     ->required()
-                    ->live(onBlur: true) 
-                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => 
-                        $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null)
-                    ->maxLength(255),
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(function (string $operation, $state, Forms\Set $set) {
+                        if ($operation === 'create') {
+                            $set('slug', \Illuminate\Support\Str::slug($state));
+                        }
+                    }),
 
                 Forms\Components\TextInput::make('slug')
                     ->label('Slug')
+                    ->required()
+                    ->maxLength(255)
                     ->readOnly()
                     ->dehydrated(true),
 
@@ -39,14 +44,16 @@ class CategoryResource extends Resource
                     ->label('Category Image')
                     ->image()
                     ->disk('public')
-                    ->directory('categories')
+                    ->directory('categories') // Saves to storage/app/public/categories
                     ->visibility('public')
                     ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp'])
-                    ->maxSize(2048)
+                    ->maxSize(2048) // 2MB max
                     ->imageResizeMode('cover')
                     ->imageCropAspectRatio('1:1')
                     ->imageResizeTargetWidth('800')
+                    ->imageResizeTargetHeight('800')
                     ->loadingIndicatorPosition('left')
+                    ->helperText('Upload square image (1:1 ratio). Max size: 2MB')
                     ->nullable(),
 
                 Forms\Components\Toggle::make('status')
@@ -63,19 +70,27 @@ class CategoryResource extends Resource
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Image')
                     ->disk('public')
+                    ->visibility('public')
                     ->url(fn ($record) => $record->image ? asset('storage/' . $record->image) : null)
                     ->circular()
-                    ->defaultImageUrl('https://ui-avatars.com/api/?name=Category&background=e5e7eb&color=6b7280')
-                    ->size(50),
+                    ->defaultImageUrl('https://ui-avatars.com/api/?name=Category&background=e5e7eb&color=6b7280&size=50')
+                    ->size(50)
+                    ->getStateUsing(fn ($record) => $record->image),
 
                 Tables\Columns\TextColumn::make('name')
                     ->label('Category Name')
                     ->searchable()
-                    ->sortable(),
+                    ->sortable()
+                    ->copyable()
+                    ->copyMessage('Category name copied')
+                    ->copyMessageDuration(1500),
 
                 Tables\Columns\TextColumn::make('slug')
                     ->label('Slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->copyable()
+                    ->copyMessage('Slug copied')
+                    ->copyMessageDuration(1500),
 
                 Tables\Columns\IconColumn::make('status')
                     ->label('Status')
@@ -83,10 +98,18 @@ class CategoryResource extends Resource
                     ->trueIcon('heroicon-o-check-circle')
                     ->falseIcon('heroicon-o-x-circle')
                     ->trueColor('success')
-                    ->falseColor('danger'),
+                    ->falseColor('danger')
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('created_at')
+                    ->label('Created')
+                    ->dateTime('M d, Y')
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
+                    ->label('Status')
                     ->options([
                         '1' => 'Active',
                         '0' => 'Inactive',
@@ -107,6 +130,11 @@ class CategoryResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ])
+            ->emptyStateHeading('No categories found')
+            ->emptyStateDescription('Create your first category to get started.')
+            ->emptyStateActions([
+                Tables\Actions\CreateAction::make(),
             ]);
     }
 
