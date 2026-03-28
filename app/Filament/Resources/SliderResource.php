@@ -44,11 +44,6 @@ class SliderResource extends Resource
                 ->maxSize(5120)
                 ->helperText('Upload slider banner image. Max size: 5MB')
                 ->required(),
-
-            Toggle::make('status')
-                ->label('Active')
-                ->default(true)
-                ->helperText('Show this slider on homepage'),
         ])->columns(1);
     }
 
@@ -68,10 +63,6 @@ class SliderResource extends Resource
             TextColumn::make('title')
                 ->label('Title')
                 ->searchable(),
-
-            Tables\Columns\IconColumn::make('status')
-                ->boolean()
-                ->label('Active'),
             ])
             ->filters([
                 //

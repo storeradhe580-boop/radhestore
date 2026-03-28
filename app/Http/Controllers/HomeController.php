@@ -60,17 +60,10 @@ class HomeController extends Controller
     }
     
     /**
-     * Get sliders with fallback for missing status column
+     * Get sliders - simple query without status filter
      */
     private function getSliders()
     {
-        $query = Slider::query();
-        
-        // Only filter by status if column exists
-        if (Schema::hasColumn('sliders', 'status')) {
-            $query->where('status', true);
-        }
-        
-        return $query->latest()->take(5)->get();
+        return Slider::latest()->take(5)->get();
     }
 }
