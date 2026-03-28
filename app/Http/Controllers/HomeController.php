@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Schema;
 
 class HomeController extends Controller
 {
@@ -16,19 +17,67 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // TEMPORARY: Fetch all data without status filters (columns don't exist yet)
-        $categories = Category::whereNotNull('image')
-            ->orderBy('name')
-            ->get();
+        // Fetch categories (status column should exist, but be safe)
+        $categories = $this->getCategories();
         
-        $products = Product::latest()
-            ->take(12)
-            ->get();
+        // Fetch products (check if status column exists)
+        $products = $this->getProducts();
         
-        $banners = Slider::orderBy('sort_order')
-            ->take(5)
-            ->get();
+        // Fetch sliders (check if is_published and sort_order exist)
+        $banners = $this->getSliders();
         
         return view('welcome', compact('categories', 'products', 'banners'));
+    }
+    
+    /**
+     * Get categories with fallback
+     */
+    private function getCategories()
+    {
+        $query = Category::whereNotNull('image');
+        
+        // Only filter by status if column exists
+        if (Schema::hasColumn('categories', 'status')) {
+            $query->where('status', true);
+        }
+        
+        return $query->orderBy('name')->get();
+    }
+    
+    /**
+     * Get products with fallback for missing status column
+     */
+    private function getProducts()
+    {
+        $query = Product::query();
+        
+        // Only filter by status if column exists
+        if (Schema::hasColumn('products', 'status')) {
+            $query->where('status', true);
+        }
+        
+        return $query->latest()->take(12)->get();
+    }
+    
+    /**
+     * Get sliders with fallback for missing columns
+     */
+    private function getSliders()
+    {
+        $query = Slider::query();
+        
+        // Only filter by is_published if column exists
+        if (Schema::hasColumn('sliders', 'is_published')) {
+            $query->where('is_published', true);
+        }
+        
+        // Only order by sort_order if column exists
+        if (Schema::hasColumn('sliders', 'sort_order')) {
+            $query->orderBy('sort_order');
+        } else {
+            $query->latest();
+        }
+        
+        return $query->take(5)->get();
     }
 }
