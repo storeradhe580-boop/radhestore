@@ -64,6 +64,7 @@ class CategoryResource extends Resource
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Image')
                     ->disk('public')
+                    ->url(fn ($record) => $record->image ? asset('storage/' . $record->image) : null)
                     ->circular()
                     ->defaultImageUrl('https://ui-avatars.com/api/?name=Category&background=e5e7eb&color=6b7280')
                     ->size(50),
