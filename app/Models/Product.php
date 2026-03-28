@@ -22,6 +22,7 @@ class Product extends Model
     'SKU',
     'quantity',
     'stock_status',
+    'status',
     'featured',
     'style_id',
     'sla_days',
@@ -30,6 +31,11 @@ class Product extends Model
     'hsn_code',
     'gst_percentage',
      ];
+
+    protected $casts = [
+        'status' => 'boolean',
+        'featured' => 'boolean',
+    ];
 
 
 
