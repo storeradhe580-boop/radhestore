@@ -43,8 +43,8 @@ class CategoryResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('Category Image')
                     ->image()
-                    ->disk('public')
-                    ->directory('categories') // Saves to storage/app/public/categories
+                    ->disk(env('APP_ENV') === 'production' ? 'cloudinary' : 'public')
+                    ->directory('categories')
                     ->visibility('public')
                     ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp'])
                     ->maxSize(2048) // 2MB max
@@ -69,9 +69,13 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Image')
-                    ->disk('public')
+                    ->disk(env('APP_ENV') === 'production' ? 'cloudinary' : 'public')
                     ->visibility('public')
-                    ->url(fn ($record) => $record->image ? asset('storage/' . $record->image) : null)
+                    ->url(fn ($record) => $record->image ? (
+                        env('APP_ENV') === 'production' 
+                            ? $record->image // Cloudinary returns full URL
+                            : asset('storage/' . $record->image)
+                    ) : null)
                     ->circular()
                     ->defaultImageUrl('https://ui-avatars.com/api/?name=Category&background=e5e7eb&color=6b7280&size=50')
                     ->size(50)

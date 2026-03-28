@@ -50,6 +50,32 @@ class Category extends Model
             return null;
         }
         
+        // For production, use Cloudinary URL (stored as full URL)
+        if (app()->environment('production')) {
+            return $this->image; // Cloudinary stores full URL
+        }
+        
+        // For local development, use storage path
         return asset('storage/' . $this->image);
+    }
+    
+    /**
+     * Get the image path for storage operations.
+     *
+     * @return string|null
+     */
+    public function getImagePathAttribute()
+    {
+        if (!$this->image) {
+            return null;
+        }
+        
+        // For production, Cloudinary URL is the path
+        if (app()->environment('production')) {
+            return $this->image;
+        }
+        
+        // For local, return relative path
+        return $this->image;
     }
 }
