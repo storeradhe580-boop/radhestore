@@ -10,18 +10,30 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     /**
-     * Show the application homepage with categories.
+     * Show the application homepage with categories, products, and banners.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        // DEBUG: Check if categories exist
-        $categories = Category::all();
+        // Fetch active categories with images
+        $categories = Category::where('status', true)
+            ->whereNotNull('image')
+            ->orderBy('name')
+            ->get();
         
-        // Uncomment the line below to debug (will show data and stop)
-        // dd($categories);
+        // Fetch featured products
+        $products = Product::where('status', true)
+            ->latest()
+            ->take(12)
+            ->get();
         
-        return view('home', compact('categories'));
+        // Fetch active banners/sliders
+        $banners = Slider::where('is_published', true)
+            ->orderBy('sort_order')
+            ->take(5)
+            ->get();
+        
+        return view('welcome', compact('categories', 'products', 'banners'));
     }
 }

@@ -136,34 +136,6 @@
     </section>
     @endif
 
-    @if(isset($categories) && $categories->count() > 0)
-    <section class="py-12 bg-white" id="collection">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <p class="text-[10px] tracking-[0.25em] uppercase text-[#D4AF37] font-bold mb-2">Our Collections</p>
-                <h2 class="serif text-2xl md:text-3xl text-[#2b0505]">Shop by Category</h2>
-            </div>
-            
-            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
-                @foreach($categories as $category)
-                <a href="{{ route('category.show', $category->slug) }}" class="group no-underline block text-center">
-                    <div class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden bg-[#FCF9F5] border border-black/5 mb-3 mx-auto group-hover:shadow-lg transition-all duration-300">
-                        @if($category->image)
-                            <img src="{{ asset('storage/' . $category->image) }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="{{ $category->name }}">
-                        @else
-                            <div class="w-full h-full flex items-center justify-center text-black/20">
-                                <i class="bi bi-grid-3x3-gap text-2xl md:text-3xl"></i>
-                            </div>
-                        @endif
-                    </div>
-                    <h6 class="text-[9px] md:text-[10px] font-bold tracking-widest uppercase text-black/80 group-hover:text-[#D4AF37] transition-colors">{{ $category->name }}</h6>
-                </a>
-                @endforeach
-            </div>
-        </div>
-    </section>
-    @endif
-
     <section class="py-8 bg-[#FCF9F5]">
         <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-8">
