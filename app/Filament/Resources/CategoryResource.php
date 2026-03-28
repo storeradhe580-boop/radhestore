@@ -94,7 +94,13 @@ class CategoryResource extends Resource
                         '1' => 'Active',
                         '0' => 'Inactive',
                     ])
-                    ->query(fn (Builder $query): Builder => $query->where('status', request('status'))),
+                    ->query(function (Builder $query) {
+                        $status = request('status');
+                        if ($status !== null && $status !== '') {
+                            return $query->where('status', $status);
+                        }
+                        return $query;
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
