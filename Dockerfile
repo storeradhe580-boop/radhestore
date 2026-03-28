@@ -25,13 +25,16 @@ COPY . .
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+# 🔥 FIX: Laravel storage folders
+RUN mkdir -p storage/framework/cache \
+    storage/framework/sessions \
+    storage/framework/views \
+    storage/logs \
+    bootstrap/cache
+
+RUN chmod -R 777 storage bootstrap/cache
+
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
-
-RUN php artisan storage:link
-RUN php artisan filament:assets
-
-RUN chown -R www-data:www-data storage bootstrap/cache
-RUN chmod -R 775 storage bootstrap/cache
 
 # 🔥 IMPORTANT: Render PORT support
 ENV PORT=10000
