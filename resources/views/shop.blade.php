@@ -49,7 +49,48 @@
                 </form>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-[300px_minmax(0,1fr)] gap-12">
+            {{-- Categories with Images --}}
+            @if(isset($categories) && $categories->count() > 0)
+            <div class="bg-white rounded-3xl border border-black/5 p-6 shadow-sm">
+                <div class="text-center mb-4">
+                    <p class="text-[10px] tracking-[0.25em] uppercase text-[#D4AF37] font-bold">Browse by Category</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 md:gap-6">
+                    <a href="{{ route('shop.index') }}" 
+                       class="group text-center {{ !$activeCategory ? 'ring-2 ring-[#D4AF37] rounded-full' : '' }}">
+                        <div class="relative w-16 h-16 md:w-20 md:h-20 mx-auto mb-2 rounded-full overflow-hidden border-2 border-[#D4AF37]/20 group-hover:border-[#D4AF37] transition-all duration-300 shadow-sm group-hover:shadow-md">
+                            <div class="w-full h-full bg-gradient-to-br from-[#D4AF37]/20 to-[#D4AF37]/40 flex items-center justify-center">
+                                <span class="text-[#D4AF37] text-lg font-serif">All</span>
+                            </div>
+                        </div>
+                        <h3 class="text-xs font-medium text-[#2b0505] group-hover:text-[#D4AF37] transition-colors">
+                            All Products
+                        </h3>
+                    </a>
+                    @foreach($categories as $cat)
+                        <a href="{{ route('shop.index', array_merge(request()->query(), ['category' => $cat->name, 'page' => null])) }}" 
+                           class="group text-center {{ $activeCategory === $cat->name ? 'ring-2 ring-[#D4AF37] rounded-full' : '' }}">
+                            <div class="relative w-16 h-16 md:w-20 md:h-20 mx-auto mb-2 rounded-full overflow-hidden border-2 border-[#D4AF37]/20 group-hover:border-[#D4AF37] transition-all duration-300 shadow-sm group-hover:shadow-md">
+                                @if($cat->image)
+                                    <img src="{{ $cat->image }}" 
+                                         alt="{{ $cat->name }}" 
+                                         class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                @else
+                                    <div class="w-full h-full bg-gradient-to-br from-[#D4AF37]/20 to-[#D4AF37]/40 flex items-center justify-center">
+                                        <span class="text-[#D4AF37] text-lg font-serif">{{ substr($cat->name, 0, 1) }}</span>
+                                    </div>
+                                @endif
+                            </div>
+                            <h3 class="text-xs font-medium text-[#2b0505] group-hover:text-[#D4AF37] transition-colors line-clamp-1 max-w-[80px]">
+                                {{ $cat->name }}
+                            </h3>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+            @endif
+
+            <div class="grid grid-cols-1 lg:grid-cols-[280px_minmax(0,1fr)] gap-12">
                 {{-- Sidebar Filters --}}
                 <aside class="hidden lg:block space-y-8">
                     <form action="{{ route('shop.index') }}" method="GET" class="sticky top-28 space-y-8">

@@ -43,18 +43,14 @@ class CategoryResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('Category Image')
                     ->image()
-                    ->disk('cloudinary') // Always use Cloudinary
+                    ->disk('cloudinary')
                     ->directory('categories')
                     ->visibility('public')
-                    ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp'])
-                    ->maxSize(5120) // 5MB
-                    ->imageResizeMode('cover')
-                    ->imageCropAspectRatio('1:1')
-                    ->imageResizeTargetWidth('800')
-                    ->imageResizeTargetHeight('800')
-                    ->loadingIndicatorPosition('left')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->maxSize(5120)
                     ->helperText('Upload square image (1:1 ratio). Max size: 5MB')
-                    ->nullable(),
+                    ->nullable()
+                    ->preserveFilenames(),
 
                 Forms\Components\Toggle::make('status')
                     ->label('Active Status')
