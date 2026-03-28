@@ -47,13 +47,13 @@ class CategoryResource extends Resource
                     ->directory('categories')
                     ->visibility('public')
                     ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp'])
-                    ->maxSize(2048) // 2MB max
+                    ->maxSize(5120) // 5MB for Cloudinary
                     ->imageResizeMode('cover')
                     ->imageCropAspectRatio('1:1')
                     ->imageResizeTargetWidth('800')
                     ->imageResizeTargetHeight('800')
                     ->loadingIndicatorPosition('left')
-                    ->helperText('Upload square image (1:1 ratio). Max size: 2MB')
+                    ->helperText('Upload square image (1:1 ratio). Max size: 5MB')
                     ->nullable(),
 
                 Forms\Components\Toggle::make('status')
@@ -71,15 +71,20 @@ class CategoryResource extends Resource
                     ->label('Image')
                     ->disk(env('APP_ENV') === 'production' ? 'cloudinary' : 'public')
                     ->visibility('public')
-                    ->url(fn ($record) => $record->image ? (
-                        env('APP_ENV') === 'production' 
-                            ? $record->image // Cloudinary returns full URL
-                            : asset('storage/' . $record->image)
-                    ) : null)
+                    ->url(function ($record) {
+                        if (!$record->image) return null;
+                        
+                        if (app()->environment('production')) {
+                            // Cloudinary stores full URLs
+                            return $record->image;
+                        }
+                        
+                        // Local development - use storage path
+                        return asset('storage/' . $record->image);
+                    })
                     ->circular()
                     ->defaultImageUrl('https://ui-avatars.com/api/?name=Category&background=e5e7eb&color=6b7280&size=50')
-                    ->size(50)
-                    ->getStateUsing(fn ($record) => $record->image),
+                    ->size(50),
 
                 Tables\Columns\TextColumn::make('name')
                     ->label('Category Name')

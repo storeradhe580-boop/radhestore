@@ -44,3 +44,26 @@ if (!function_exists('getCategoryImageUrl')) {
         return getImageUrl($category->image);
     }
 }
+
+if (!function_exists('displayImage')) {
+    /**
+     * Display image with proper URL and fallback.
+     *
+     * @param string|null $imagePath
+     * @param string $alt
+     * @param string $class
+     * @param string|null $fallback
+     * @return string
+     */
+    function displayImage($imagePath, $alt = '', $class = '', $fallback = null)
+    {
+        $url = getImageUrl($imagePath) ?: ($fallback ?: 'https://ui-avatars.com/api/?name=' . urlencode($alt));
+        
+        return sprintf(
+            '<img src="%s" alt="%s" class="%s" loading="lazy">',
+            htmlspecialchars($url, ENT_QUOTES, 'UTF-8'),
+            htmlspecialchars($alt, ENT_QUOTES, 'UTF-8'),
+            htmlspecialchars($class, ENT_QUOTES, 'UTF-8')
+        );
+    }
+}
