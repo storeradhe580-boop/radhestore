@@ -50,29 +50,62 @@ class CategoryResource extends Resource
             ->imageResizeTargetWidth('800')
             ->loadingIndicatorPosition('left')
             ->nullable(),
+
+        Forms\Components\Toggle::make('status')
+            ->label('Active Status')
+            ->default(true)
+            ->helperText('Enable to show category in frontend'),
         ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-    ->columns([
-        Tables\Columns\ImageColumn::make('image')
-            ->label('Image')
-            ->circular()
-            ->defaultImageUrl('https://res.cloudinary.com/demo/image/upload/v1/default-placeholder.jpg')
-            ->url(fn ($record) => $record->image 
-                ? asset($record->image) 
-                : 'https://res.cloudinary.com/demo/image/upload/v1/default-placeholder.jpg'
-            ),
+            ->columns([
+                Tables\Columns\ImageColumn::make('image')
+                    ->label('Image')
+                    ->circular()
+                    ->defaultImageUrl('https://res.cloudinary.com/demo/image/upload/v1/default-placeholder.jpg')
+                    ->url(fn ($record) => $record->image 
+                        ? asset($record->image) 
+                        : 'https://res.cloudinary.com/demo/image/upload/v1/default-placeholder.jpg'
+                    ),
 
-        Tables\Columns\TextColumn::make('name')
-            ->label('Category Name')
-            ->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->label('Category Name')
+                    ->searchable()
+                    ->sortable(),
 
-        Tables\Columns\TextColumn::make('slug')
-            ->label('Slug'),
-    ]);
+                Tables\Columns\TextColumn::make('slug')
+                    ->label('Slug')
+                    ->searchable(),
+
+                Tables\Columns\IconColumn::make('status')
+                    ->label('Status')
+                    ->boolean()
+                    ->trueIcon('heroicon-o-check-circle')
+                    ->falseIcon('heroicon-o-x-circle')
+                    ->trueColor('success')
+                    ->falseColor('danger'),
+            ])
+            ->filters([
+                // Optional: Add status filter if needed
+                Tables\Filters\SelectFilter::make('status')
+                    ->options([
+                        '1' => 'Active',
+                        '0' => 'Inactive',
+                    ])
+                    ->query(fn (Builder $query): Builder => $query->where('status', request('status'))),
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
     }
 
     public static function getRelations(): array
