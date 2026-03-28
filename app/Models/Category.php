@@ -25,8 +25,6 @@ class Category extends Model
      */
     protected $casts = [
         'status' => 'boolean',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
     ];
     
     /**
@@ -41,7 +39,6 @@ class Category extends Model
     /**
      * Get the image URL attribute.
      *
-     * @param string $value
      * @return string|null
      */
     public function getImageUrlAttribute()
@@ -52,5 +49,16 @@ class Category extends Model
         
         // Cloudinary stores full URLs, so return as-is
         return $this->image;
+    }
+    
+    /**
+     * Get active categories only.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeActive($query)
+    {
+        return $query->where('status', true);
     }
 }

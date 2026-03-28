@@ -2,29 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Page;
+use App\Models\Product;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        // Remove auth middleware to allow all users to access homepage
-    }
-
-    /**
-     * Show the application dashboard.
+     * Show the application homepage with categories.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('welcome');
+        // Fetch active categories with images
+        $categories = Category::active()
+            ->whereNotNull('image')
+            ->orderBy('name')
+            ->get();
+        
+        // Fetch featured products
+        $featuredProducts = Product::where('status', true)
+            ->with('category')
+            ->latest()
+            ->take(8)
+            ->get();
+        
+        // Fetch active sliders
+        $sliders = Slider::where('is_published', true)
+            ->orderBy('sort_order')
+            ->get();
+        
+        return view('home', compact('categories', 'featuredProducts', 'sliders'));
     }
 
     /**
