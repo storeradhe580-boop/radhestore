@@ -22,9 +22,8 @@ class HomeController extends Controller
             ->orderBy('name')
             ->get();
         
-        // Fetch featured products
-        $products = Product::where('status', true)
-            ->latest()
+        // Fetch featured products (temporary - without status filter)
+        $products = Product::latest()
             ->take(12)
             ->get();
         
