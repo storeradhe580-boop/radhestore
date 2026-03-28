@@ -42,24 +42,37 @@ class SliderResource extends Resource
                 ->label('Line 2'),
 
             FileUpload::make('image')
-                ->label('Upload images')
-                ->image() 
-                ->directory('sliders') 
+                ->label('Slider Background Image')
+                ->image()
+                ->disk('cloudinary')
+                ->directory('sliders')
+                ->visibility('public')
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                ->maxSize(5120)
+                ->helperText('Upload banner background image. Max size: 5MB')
                 ->required(),
 
             FileUpload::make('inset_image')
-                ->label('Upload Inset Image')
+                ->label('Slider Inset Image (Product)')
                 ->image()
+                ->disk('cloudinary')
                 ->directory('sliders')
-                ->required(),
+                ->visibility('public')
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                ->maxSize(5120)
+                ->helperText('Upload product inset image. Max size: 5MB')
+                ->nullable(),
 
-            Select::make('icon')
-                ->label('Select category icon')
-                ->options([
-                    'icon-1' => 'Icon 1',
-                    'icon-2' => 'Icon 2',
-                    'icon-3' => 'Icon 3',
-                ]),
+            Toggle::make('is_published')
+                ->label('Published')
+                ->default(true)
+                ->helperText('Show this slider on homepage'),
+
+            TextInput::make('sort_order')
+                ->label('Sort Order')
+                ->numeric()
+                ->default(0)
+                ->helperText('Lower numbers appear first'),
         ])->columns(1);
     }
 
@@ -71,22 +84,30 @@ class SliderResource extends Resource
             TextColumn::make('id')->label('ID')->sortable(),
 
             // ૨. ઈમેજ (જો સ્લાઈડરમાં ફોટો હોય તો)
-            ImageColumn::make('image') // તમારી કોલમનું નામ ચેક કરી લેજો
-                ->label('Image'),
+            ImageColumn::make('image')
+                ->label('Image')
+                ->disk('cloudinary')
+                ->url(fn ($record) => $record->image)
+                ->size(60),
+
+            ImageColumn::make('inset_image')
+                ->label('Inset')
+                ->disk('cloudinary')
+                ->url(fn ($record) => $record->inset_image)
+                ->size(40),
 
             // ૩. ટાઈટલ
-            TextColumn::make('title') // તમારી કોલમનું નામ 'title' કે 'name' હોઈ શકે
+            TextColumn::make('title')
                 ->label('Title')
                 ->searchable(),
 
-            // ૪. લિંક અથવા બીજો ડેટા
-            TextColumn::make('link')
-                ->label('Link'),
-                
-            // ૫. સ્ટેટસ (જો હોય તો)
-            Tables\Columns\IconColumn::make('status')
+            TextColumn::make('sort_order')
+                ->label('Order')
+                ->sortable(),
+
+            Tables\Columns\IconColumn::make('is_published')
                 ->boolean()
-                ->label('Status'),
+                ->label('Published'),
             ])
             ->filters([
                 //
