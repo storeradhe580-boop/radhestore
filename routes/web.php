@@ -142,3 +142,22 @@ Route::get('/storage-link', function () {
     }
 });
 
+// Debug Slider Data Route
+Route::get('/debug-sliders', function () {
+    $banners = \App\Models\Slider::latest()->take(5)->get();
+    
+    $debug = [];
+    foreach ($banners as $banner) {
+        $debug[] = [
+            'id' => $banner->id,
+            'title' => $banner->title,
+            'image' => $banner->image,
+            'image_url' => asset('storage/' . $banner->image),
+            'file_exists' => file_exists(storage_path('app/public/' . $banner->image)),
+            'public_storage_exists' => file_exists(public_path('storage/' . $banner->image)),
+        ];
+    }
+    
+    return response()->json($debug);
+});
+
