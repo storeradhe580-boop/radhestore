@@ -13,8 +13,13 @@
                     <div class="relative w-full min-h-[500px]">
                         <!-- Background Image -->
                         @if($banner->image)
-                            <img src="{{ $banner->image }}" loading="lazy" decoding="async" 
-                                 class="absolute inset-0 w-full h-full object-cover" alt="{{ $banner->title }}">
+                            @if(str_starts_with($banner->image, 'http'))
+                                <img src="{{ $banner->image }}" loading="lazy" decoding="async" 
+                                     class="absolute inset-0 w-full h-full object-cover" alt="{{ $banner->title }}">
+                            @else
+                                <img src="{{ asset('storage/' . $banner->image) }}" loading="lazy" decoding="async" 
+                                     class="absolute inset-0 w-full h-full object-cover" alt="{{ $banner->title }}">
+                            @endif
                         @else
                             <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=600" 
                                  class="absolute inset-0 w-full h-full object-cover" alt="Jewelry Product">
@@ -106,8 +111,13 @@
                         <div class="flex items-center justify-center lg:justify-end px-6 sm:px-12 lg:px-20 py-12 lg:py-0">
                             <div class="w-full max-w-md lg:max-w-lg">
                                 @if($banner->image)
-                                    <img src="{{ $banner->image }}" loading="lazy" decoding="async" 
-                                         class="w-full h-auto object-cover rounded-lg shadow-lg" alt="{{ $banner->title }}">
+                                    @if(str_starts_with($banner->image, 'http'))
+                                        <img src="{{ $banner->image }}" loading="lazy" decoding="async" 
+                                             class="w-full h-auto object-cover rounded-lg shadow-lg" alt="{{ $banner->title }}">
+                                    @else
+                                        <img src="{{ asset('storage/' . $banner->image) }}" loading="lazy" decoding="async" 
+                                             class="w-full h-auto object-cover rounded-lg shadow-lg" alt="{{ $banner->title }}">
+                                    @endif
                                 @else
                                     <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=600" 
                                          class="w-full h-auto object-cover rounded-lg shadow-lg" alt="Jewelry Product">
