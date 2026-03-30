@@ -8,6 +8,8 @@ class Slider extends Model
 {
     protected $fillable = [
         'title', 
+        'line_1',
+        'line_2',
         'image', 
     ];
 }

@@ -34,6 +34,14 @@ class SliderResource extends Resource
                 ->required()
                 ->label('Slider Title'),
 
+            TextInput::make('line_1')
+                ->label('Line 1')
+                ->helperText('First line of text (optional)'),
+
+            TextInput::make('line_2')
+                ->label('Line 2')
+                ->helperText('Second line of text (optional)'),
+
             FileUpload::make('image')
                 ->label('Slider Image')
                 ->image()
