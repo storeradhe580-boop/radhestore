@@ -148,13 +148,15 @@ Route::get('/debug-sliders', function () {
     
     $debug = [];
     foreach ($banners as $banner) {
+        $isCloudinary = str_starts_with($banner->image, 'http');
         $debug[] = [
             'id' => $banner->id,
             'title' => $banner->title,
             'image' => $banner->image,
-            'image_url' => asset('storage/' . $banner->image),
-            'file_exists' => file_exists(storage_path('app/public/' . $banner->image)),
-            'public_storage_exists' => file_exists(public_path('storage/' . $banner->image)),
+            'is_cloudinary' => $isCloudinary,
+            'image_url' => $isCloudinary ? $banner->image : asset('storage/' . $banner->image),
+            'file_exists' => $isCloudinary ? 'Cloudinary URL' : file_exists(storage_path('app/public/' . $banner->image)),
+            'public_storage_exists' => $isCloudinary ? 'Cloudinary URL' : file_exists(public_path('storage/' . $banner->image)),
         ];
     }
     
