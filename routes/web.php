@@ -128,3 +128,17 @@ Route::post('/upload-image', [ImageUploadController::class, 'uploadImage'])->nam
 Route::post('/delete-image', [ImageUploadController::class, 'deleteImage'])->name('image.delete');
 Route::get('/image-info/{public_id}', [ImageUploadController::class, 'getImageInfo'])->name('image.info');
 
+// Storage Link Route for Production
+Route::get('/storage-link', function () {
+    try {
+        if (!file_exists(public_path('storage'))) {
+            Artisan::call('storage:link');
+            return "Storage link created successfully!";
+        } else {
+            return "Storage link already exists!";
+        }
+    } catch (Exception $e) {
+        return "Error creating storage link: " . $e->getMessage();
+    }
+});
+
