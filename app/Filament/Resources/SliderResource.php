@@ -51,10 +51,7 @@ class SliderResource extends Resource
                 ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
                 ->maxSize(5120)
                 ->helperText('Upload slider banner image. Max size: 5MB')
-                ->required()
-                ->saveUploadedFileUsing(function ($file) {
-                    return $file->storeOnCloudinary('sliders')->getSecurePath();
-                }),
+                ->required(),
         ])->columns(1);
     }
 
@@ -68,7 +65,6 @@ class SliderResource extends Resource
             ImageColumn::make('image')
                 ->label('Image')
                 ->disk('cloudinary')
-                ->url(fn ($record) => $record->image)
                 ->size(60),
 
             TextColumn::make('title')
