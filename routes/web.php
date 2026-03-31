@@ -157,7 +157,7 @@ Route::get('/debug-sliders', function () {
             'title' => $banner->title,
             'image' => $banner->image,
             'is_cloudinary' => $isCloudinary,
-            'image_url' => $isCloudinary ? $banner->image : url('storage/' . $banner->image),
+            'image_url' => $banner->image, // Use direct image like categories
             'file_exists' => $isCloudinary ? 'Cloudinary URL' : file_exists(storage_path('app/public/' . $banner->image)),
             'public_storage_exists' => $isCloudinary ? 'Cloudinary URL' : file_exists(public_path('storage/' . $banner->image)),
         ];
