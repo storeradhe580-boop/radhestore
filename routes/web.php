@@ -146,6 +146,9 @@ Route::get('/storage-link', function () {
 Route::get('/debug-sliders', function () {
     $banners = \App\Models\Slider::latest()->take(5)->get();
     
+    // Debug with dd as requested
+    dd($banners);
+    
     $debug = [];
     foreach ($banners as $banner) {
         $isCloudinary = str_starts_with($banner->image, 'http');
@@ -154,7 +157,7 @@ Route::get('/debug-sliders', function () {
             'title' => $banner->title,
             'image' => $banner->image,
             'is_cloudinary' => $isCloudinary,
-            'image_url' => $isCloudinary ? $banner->image : asset('storage/' . $banner->image),
+            'image_url' => $isCloudinary ? $banner->image : url('storage/' . $banner->image),
             'file_exists' => $isCloudinary ? 'Cloudinary URL' : file_exists(storage_path('app/public/' . $banner->image)),
             'public_storage_exists' => $isCloudinary ? 'Cloudinary URL' : file_exists(public_path('storage/' . $banner->image)),
         ];

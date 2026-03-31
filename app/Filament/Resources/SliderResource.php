@@ -45,7 +45,7 @@ class SliderResource extends Resource
             FileUpload::make('image')
                 ->label('Slider Image')
                 ->image()
-                ->disk('cloudinary')
+                ->disk('public')
                 ->directory('sliders')
                 ->visibility('public')
                 ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
@@ -64,7 +64,7 @@ class SliderResource extends Resource
 
             ImageColumn::make('image')
                 ->label('Image')
-                ->disk('cloudinary')
+                ->disk('public')
                 ->size(60),
 
             TextColumn::make('title')
