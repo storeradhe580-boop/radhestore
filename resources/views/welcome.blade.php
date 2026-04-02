@@ -3,15 +3,11 @@
 @section('title', 'Radhe Store - Heritage Jewelry')
 
 @section('content')
-    <!-- Debug Sliders -->
-    {{ $sliders }}
-
     <!-- Slider Section -->
     @if($sliders && $sliders->count() > 0)
     <div class="mb-6">
         @foreach($sliders as $slider)
             <div class="mb-4">
-                <p>Slider: {{ $slider->title }} - Image: {{ $slider->image }}</p>
                 <img src="{{ asset('storage/'.$slider->image) }}" 
                      class="w-full h-64 object-cover mb-4"
                      alt="{{ $slider->title }}">
