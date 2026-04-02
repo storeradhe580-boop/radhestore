@@ -26,7 +26,7 @@ class HomeController extends Controller
         // Fetch sliders (use same name as Blade)
         $banners = Slider::latest()->get();
         
-        return view('welcome', compact('categories', 'products', 'banners'));
+        return view('home', compact('categories', 'products', 'banners'));
     }
     
     /**
