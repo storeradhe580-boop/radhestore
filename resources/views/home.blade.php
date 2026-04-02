@@ -1,6 +1,30 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if($banners && $banners->count() > 0)
+<div class="w-full mb-10">
+    @foreach($banners as $banner)
+        <div class="mb-6">
+            
+            <!-- Title -->
+            <h2 class="text-xl font-bold mb-2 text-center">
+                {{ $banner->title }}
+            </h2>
+
+            <!-- Image -->
+            <div class="flex justify-center">
+                <img src="{{ asset('storage/'.$banner->image) }}" 
+                     alt="{{ $banner->title }}"
+                     class="w-full max-w-3xl h-64 object-cover rounded-lg shadow">
+            </div>
+
+        </div>
+    @endforeach
+</div>
+@endif
+<!-- 🔥 SLIDER END -->
+
 <div class="container mx-auto px-4 py-8">
     
     <!-- Page Title -->
