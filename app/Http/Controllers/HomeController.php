@@ -17,16 +17,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Fetch categories (status column should exist, but be safe)
+        // Fetch categories
         $categories = $this->getCategories();
         
-        // Fetch products (check if status column exists)
+        // Fetch products
         $products = $this->getProducts();
         
-        // Fetch sliders (check if is_published and sort_order exist)
-        $banners = $this->getSliders();
+        // Fetch sliders
+        $sliders = Slider::latest()->get();
         
-        return view('welcome', compact('categories', 'products', 'banners'));
+        return view('welcome', compact('categories', 'products', 'sliders'));
     }
     
     /**
