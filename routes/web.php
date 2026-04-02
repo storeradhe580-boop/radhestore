@@ -162,24 +162,20 @@ Route::get('/debug-categories', function () {
     return response()->json($debug);
 });
 
-// Debug Slider Data Route
+// Debug Slider Images Route
 Route::get('/debug-sliders', function () {
-    $banners = \App\Models\Slider::latest()->take(5)->get();
-    
-    // Debug with dd as requested
-    dd($banners);
+    $sliders = \App\Models\Slider::all();
     
     $debug = [];
-    foreach ($banners as $banner) {
-        $isCloudinary = str_starts_with($banner->image, 'http');
+    foreach ($sliders as $slider) {
+        $isCloudinary = str_starts_with($slider->image, 'http');
         $debug[] = [
-            'id' => $banner->id,
-            'title' => $banner->title,
-            'image' => $banner->image,
+            'id' => $slider->id,
+            'title' => $slider->title,
+            'image' => $slider->image,
             'is_cloudinary' => $isCloudinary,
-            'image_url' => $banner->image, // Use direct image like categories
-            'file_exists' => $isCloudinary ? 'Cloudinary URL' : file_exists(storage_path('app/public/' . $banner->image)),
-            'public_storage_exists' => $isCloudinary ? 'Cloudinary URL' : file_exists(public_path('storage/' . $banner->image)),
+            'type' => $isCloudinary ? 'Cloudinary URL' : 'Local Storage Path',
+            'needs_reupload' => !$isCloudinary,
         ];
     }
     
