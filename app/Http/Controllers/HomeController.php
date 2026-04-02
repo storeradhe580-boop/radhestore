@@ -23,10 +23,10 @@ class HomeController extends Controller
         // Fetch products
         $products = $this->getProducts();
         
-        // Fetch sliders
-        $sliders = Slider::latest()->get();
+        // Fetch sliders (use same name as Blade)
+        $banners = Slider::latest()->get();
         
-        return view('welcome', compact('categories', 'products', 'sliders'));
+        return view('welcome', compact('categories', 'products', 'banners'));
     }
     
     /**

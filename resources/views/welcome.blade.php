@@ -3,6 +3,13 @@
 @section('title', 'Radhe Store - Heritage Jewelry')
 
 @section('content')
+    <!-- Debug Banners -->
+    <div class="bg-yellow-100 p-4 mb-4">
+        <h3>Debug: Banners Data</h3>
+        <pre>{{ print_r($banners, true) }}</pre>
+        <p>Count: {{ $banners ? $banners->count() : 'null' }}</p>
+    </div>
+
     <!-- Mobile Hero Slider -->
     @if(isset($banners) && $banners->count() > 0)
     <section class="block md:hidden relative w-full bg-white overflow-hidden">
