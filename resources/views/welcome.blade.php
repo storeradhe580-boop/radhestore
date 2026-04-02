@@ -3,21 +3,137 @@
 @section('title', 'Radhe Store - Heritage Jewelry')
 
 @section('content')
-    <!-- Slider Section -->
-    @if($sliders && $sliders->count() > 0)
-    <div class="mb-6">
-        @foreach($sliders as $slider)
-            <div class="mb-4">
-                <img src="{{ asset('storage/'.$slider->image) }}" 
-                     class="w-full h-64 object-cover mb-4"
-                     alt="{{ $slider->title }}">
+    <!-- Mobile Hero Slider -->
+    @if(isset($banners) && $banners->count() > 0)
+    <section class="block md:hidden relative w-full bg-white overflow-hidden">
+        <div class="swiper mobile-hero-swiper">
+            <div class="swiper-wrapper">
+                @foreach($banners as $index => $banner)
+                <div class="swiper-slide">
+                    <div class="relative w-full min-h-[500px]">
+                        <!-- Background Image -->
+                        @if($banner->image)
+                            <img src="{{ $banner->image }}" loading="lazy" decoding="async" 
+                                 class="absolute inset-0 w-full h-full object-cover" alt="{{ $banner->title }}">
+                        @else
+                            <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=600" 
+                                 class="absolute inset-0 w-full h-full object-cover" alt="Jewelry Product">
+                        @endif
+                        
+                        <!-- Dark Overlay -->
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        
+                        <!-- Content Overlay -->
+                        <div class="relative z-10 flex items-center h-full px-6 py-12">
+                            <div class="max-w-md">
+                                <!-- NEW ARRIVALS Tag -->
+                                <div class="flex items-center mb-4">
+                                    <div class="h-[1px] w-12 bg-white mr-4"></div>
+                                    <span class="text-white font-serif text-sm tracking-[0.3em] uppercase">NEW ARRIVALS</span>
+                                </div>
+                                
+                                <!-- Main Title -->
+                                <h1 class="text-3xl font-serif text-white mb-4 leading-tight font-bold">
+                                    {{ $banner->title ?? 'Night Spring Dresses' }}
+                                </h1>
+                                
+                                <!-- Shop Now Button -->
+                                <a href="{{ route('shop.index') }}" class="inline-flex items-center text-white font-serif text-sm uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors duration-300 no-underline group">
+                                    Shop Now
+                                    <span class="ml-2 border-b border-white group-hover:border-[#D4AF37] transition-colors duration-300"></span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
             </div>
-        @endforeach
-    </div>
-    @else
-        <div class="bg-red-100 p-4 mb-6">
-            <p class="text-red-600">No sliders found</p>
         </div>
+        
+        <!-- Mobile Slider Pagination -->
+        <div class="absolute bottom-6 left-6 z-20">
+            <div class="flex items-center text-white text-sm font-serif space-x-3">
+                @foreach($banners as $index => $banner)
+                    <button class="mobile-pagination-number flex items-center transition-colors duration-300 {{ $index === 0 ? 'text-white' : 'text-white/50 hover:text-white' }}" 
+                            data-slide-to="{{ $index }}">
+                        <span class="number">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        @if($index < $banners->count() - 1)
+                            <span class="line ml-2 h-[1px] w-6 bg-current transition-all duration-300 {{ $index === 0 ? 'w-8' : 'w-6' }}"></span>
+                        @endif
+                    </button>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <!-- Main Banner Section -->
+    @if(isset($banners) && $banners->count() > 0)
+    <section class="hidden md:block relative w-full bg-white overflow-hidden">
+        <div class="swiper main-banner-swiper">
+            <div class="swiper-wrapper">
+                @foreach($banners as $index => $banner)
+                <div class="swiper-slide">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 w-full min-h-[500px] lg:min-h-[600px]">
+                        <!-- Left Side: Text Content -->
+                        <div class="flex items-center justify-center lg:justify-start px-6 sm:px-12 lg:px-20 py-12 lg:py-0">
+                            <div class="max-w-lg">
+                                <!-- NEW ARRIVALS Tag with Line -->
+                                <div class="flex items-center mb-6">
+                                    <div class="h-[1px] w-12 bg-[#2b0505] mr-4"></div>
+                                    <span class="text-[#2b0505] font-bold text-sm uppercase tracking-[0.2em]">NEW ARRIVALS</span>
+                                </div>
+                                
+                                <!-- Main Title -->
+                                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2b0505] mb-6 leading-tight" style="font-family: 'Playfair Display', serif;">
+                                    {{ $banner->title }}
+                                </h1>
+                                
+                                <!-- Description -->
+                                <p class="text-gray-600 text-base md:text-lg mb-8 leading-relaxed">
+                                    {{ $banner->line_2 ?? 'Discover our latest collection of exquisite jewelry pieces crafted with precision and elegance.' }}
+                                </p>
+                                
+                                <!-- Shop Now Link with Underline -->
+                                <a href="{{ route('shop.index') }}" class="inline-flex items-center text-[#2b0505] font-bold text-sm uppercase tracking-[0.1em] hover:text-[#D4AF37] transition-colors duration-300 no-underline group">
+                                    Shop Now
+                                    <span class="ml-2 border-b-2 border-[#2b0505] group-hover:border-[#D4AF37] transition-colors duration-300"></span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Side: Product Image -->
+                        <div class="flex items-center justify-center lg:justify-end px-6 sm:px-12 lg:px-20 py-12 lg:py-0">
+                            <div class="w-full max-w-md lg:max-w-lg">
+                                @if($banner->image)
+                                    <img src="{{ $banner->image }}" loading="lazy" decoding="async" 
+                                         class="w-full h-auto object-cover rounded-lg shadow-lg" alt="{{ $banner->title }}">
+                                @else
+                                    <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=600" 
+                                         class="w-full h-auto object-cover rounded-lg shadow-lg" alt="Jewelry Product">
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        
+        <!-- Slide Numbers -->
+        <div class="absolute bottom-6 left-6 sm:left-12 lg:left-20">
+            <div class="flex items-center text-[#2b0505] text-sm font-medium">
+                @foreach($banners as $index => $banner)
+                    <span class="flex items-center">
+                        {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+                        @if($index < $banners->count() - 1)
+                            <span class="mx-2">—</span>
+                        @endif
+                    </span>
+                @endforeach
+            </div>
+        </div>
+    </section>
     @endif
 
     @if(isset($categories) && $categories->count() > 0)
@@ -33,7 +149,7 @@
                 <a href="{{ route('category.show', $category->slug) }}" class="group no-underline block text-center">
                     <div class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden bg-[#FCF9F5] border border-black/5 mb-3 mx-auto group-hover:shadow-lg transition-all duration-300">
                         @if($category->image)
-                            <img src="{{ asset('storage/' . $category->image) }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="{{ $category->name }}">
+                            <img src="{{ $category->image }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="{{ $category->name }}">
                         @else
                             <div class="w-full h-full flex items-center justify-center text-black/20">
                                 <i class="bi bi-grid-3x3-gap text-2xl md:text-3xl"></i>

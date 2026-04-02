@@ -43,7 +43,7 @@ class CategoryResource extends Resource
                 Forms\Components\FileUpload::make('image')
                     ->label('Category Image')
                     ->image()
-                    ->disk('public')
+                    ->disk('cloudinary')
                     ->directory('categories')
                     ->visibility('public')
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
@@ -65,7 +65,7 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\ImageColumn::make('image')
                     ->label('Image')
-                    ->disk('public')
+                    ->disk('cloudinary')
                     ->visibility('public')
                     ->circular()
                     ->defaultImageUrl('https://ui-avatars.com/api/?name=Category&background=e5e7eb&color=6b7280&size=50')
