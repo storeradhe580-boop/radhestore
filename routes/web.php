@@ -142,6 +142,26 @@ Route::get('/storage-link', function () {
     }
 });
 
+// Debug Category Images Route
+Route::get('/debug-categories', function () {
+    $categories = \App\Models\Category::all();
+    
+    $debug = [];
+    foreach ($categories as $category) {
+        $isCloudinary = str_starts_with($category->image, 'http');
+        $debug[] = [
+            'id' => $category->id,
+            'name' => $category->name,
+            'image' => $category->image,
+            'is_cloudinary' => $isCloudinary,
+            'type' => $isCloudinary ? 'Cloudinary URL' : 'Local Storage Path',
+            'needs_reupload' => !$isCloudinary,
+        ];
+    }
+    
+    return response()->json($debug);
+});
+
 // Debug Slider Data Route
 Route::get('/debug-sliders', function () {
     $banners = \App\Models\Slider::latest()->take(5)->get();
