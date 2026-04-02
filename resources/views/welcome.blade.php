@@ -13,7 +13,7 @@
                     <div class="relative w-full min-h-[500px]">
                         <!-- Background Image -->
                         @if($banner->image)
-                            <img src="{{ asset('storage/' . $banner->image) }}" loading="lazy" decoding="async" 
+                            <img src="{{ $banner->image }}" loading="lazy" decoding="async" 
                                  class="absolute inset-0 w-full h-full object-cover" alt="{{ $banner->title }}">
                         @else
                             <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=600" 
@@ -106,7 +106,7 @@
                         <div class="flex items-center justify-center lg:justify-end px-6 sm:px-12 lg:px-20 py-12 lg:py-0">
                             <div class="w-full max-w-md lg:max-w-lg">
                                 @if($banner->image)
-                                    <img src="{{ asset('storage/' . $banner->image) }}" loading="lazy" decoding="async" 
+                                    <img src="{{ $banner->image }}" loading="lazy" decoding="async" 
                                          class="w-full h-auto object-cover rounded-lg shadow-lg" alt="{{ $banner->title }}">
                                 @else
                                     <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=600" 
@@ -149,7 +149,7 @@
                 <a href="{{ route('category.show', $category->slug) }}" class="group no-underline block text-center">
                     <div class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden bg-[#FCF9F5] border border-black/5 mb-3 mx-auto group-hover:shadow-lg transition-all duration-300">
                         @if($category->image)
-                            <img src="{{ asset('storage/' . $category->image) }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="{{ $category->name }}">
+                            <img src="{{ $category->image }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="{{ $category->name }}">
                         @else
                             <div class="w-full h-full flex items-center justify-center text-black/20">
                                 <i class="bi bi-grid-3x3-gap text-2xl md:text-3xl"></i>
