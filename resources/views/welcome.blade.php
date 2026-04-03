@@ -179,4 +179,124 @@
             startAutoSlide();
         });
     </script>
+
+    <!-- SHOP BY CATEGORY SECTION -->
+    <section class="w-full bg-white py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Section Title -->
+            <div class="text-center mb-10">
+                <h2 class="text-2xl md:text-3xl font-bold text-[#2b0505] mb-2">Shop by Category</h2>
+                <div class="w-16 h-1 bg-[#D4AF37] mx-auto rounded"></div>
+            </div>
+
+            <!-- Category Slider Container -->
+            <div class="relative">
+                <!-- Left Arrow -->
+                <button class="category-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-[#2b0505] hover:bg-[#D4AF37] hover:text-white transition-all duration-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                </button>
+
+                <!-- Right Arrow -->
+                <button class="category-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-[#2b0505] hover:bg-[#D4AF37] hover:text-white transition-all duration-300">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </button>
+
+                <!-- Categories Scroll Container -->
+                <div class="category-scroll-container overflow-x-auto scrollbar-hide px-8" style="scrollbar-width: none; -ms-overflow-style: none;">
+                    <div class="category-items flex gap-6 py-4">
+                        
+                        <!-- Women Clothes -->
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
+                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
+                                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=200" alt="Women Clothes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Women Clothes</h3>
+                        </div>
+
+                        <!-- Men Jeans -->
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
+                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
+                                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&q=80&w=200" alt="Men Jeans" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Men Jeans</h3>
+                        </div>
+
+                        <!-- Shirts -->
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
+                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
+                                <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=200" alt="Shirts" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Shirts</h3>
+                        </div>
+
+                        <!-- Shoes -->
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
+                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
+                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=200" alt="Shoes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Shoes</h3>
+                        </div>
+
+                        <!-- Dresses -->
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
+                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
+                                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=200" alt="Dresses" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Dresses</h3>
+                        </div>
+
+                        <!-- Kids -->
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
+                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
+                                <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&q=80&w=200" alt="Kids" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Kids</h3>
+                        </div>
+
+                        <!-- Tops -->
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
+                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
+                                <img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?auto=format&fit=crop&q=80&w=200" alt="Tops" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Tops</h3>
+                        </div>
+
+                        <!-- Pants -->
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
+                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
+                                <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&q=80&w=200" alt="Pants" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            </div>
+                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Pants</h3>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Slider JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollContainer = document.querySelector('.category-scroll-container');
+            const prevBtn = document.querySelector('.category-prev');
+            const nextBtn = document.querySelector('.category-next');
+            const scrollAmount = 200;
+
+            prevBtn.addEventListener('click', function() {
+                scrollContainer.scrollBy({
+                    left: -scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+
+            nextBtn.addEventListener('click', function() {
+                scrollContainer.scrollBy({
+                    left: scrollAmount,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+
 @endsection
