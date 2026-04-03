@@ -3,300 +3,420 @@
 @section('title', 'Radhe Store - Heritage Jewelry')
 
 @section('content')
-    <!-- MODERN HERO SLIDER -->
-    <section class="relative w-full bg-white overflow-hidden">
-        <div class="hero-slider-container relative">
-            
-            <!-- Slide 1 -->
-            <div class="hero-slide active" data-index="0">
-                <div class="flex flex-col md:flex-row items-center min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
-                    <!-- Left: Text Content -->
-                    <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1">
-                        <div class="max-w-lg">
-                            <span class="inline-block text-[#D4AF37] font-semibold text-xs uppercase tracking-[0.2em] mb-4">New Arrivals</span>
-                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-6 leading-tight">Night Spring Dresses</h1>
-                            <p class="text-gray-600 text-base md:text-lg mb-8 leading-relaxed">Discover our latest collection of exquisite jewelry pieces crafted with precision and elegance.</p>
-                            <a href="{{ route('shop.index') }}" class="inline-flex items-center px-8 py-4 bg-[#2b0505] text-white font-semibold text-sm uppercase tracking-wider rounded hover:bg-[#D4AF37] hover:text-[#2b0505] transition-all duration-300 shadow-lg hover:shadow-xl">
-                                Shop Now
-                                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Right: Image -->
-                    <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=800" alt="Fashion" class="w-full h-[350px] md:h-[450px] lg:h-[550px] object-cover rounded-lg shadow-2xl">
-                            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-[#D4AF37]/20 rounded-full blur-2xl"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slide 2 -->
-            <div class="hero-slide" data-index="1">
-                <div class="flex flex-col md:flex-row items-center min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
-                    <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1">
-                        <div class="max-w-lg">
-                            <span class="inline-block text-[#D4AF37] font-semibold text-xs uppercase tracking-[0.2em] mb-4">Trending Now</span>
-                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-6 leading-tight">Summer Collection</h1>
-                            <p class="text-gray-600 text-base md:text-lg mb-8 leading-relaxed">Elevate your style with our premium selection of designer accessories and jewelry.</p>
-                            <a href="{{ route('shop.index') }}" class="inline-flex items-center px-8 py-4 bg-[#2b0505] text-white font-semibold text-sm uppercase tracking-wider rounded hover:bg-[#D4AF37] hover:text-[#2b0505] transition-all duration-300 shadow-lg hover:shadow-xl">
-                                Shop Now
-                                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&q=80&w=800" alt="Fashion" class="w-full h-[350px] md:h-[450px] lg:h-[550px] object-cover rounded-lg shadow-2xl">
-                            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-[#D4AF37]/20 rounded-full blur-2xl"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Slide 3 -->
-            <div class="hero-slide" data-index="2">
-                <div class="flex flex-col md:flex-row items-center min-h-[500px] md:min-h-[600px] lg:min-h-[700px]">
-                    <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1">
-                        <div class="max-w-lg">
-                            <span class="inline-block text-[#D4AF37] font-semibold text-xs uppercase tracking-[0.2em] mb-4">Exclusive</span>
-                            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-6 leading-tight">Premium Jewelry</h1>
-                            <p class="text-gray-600 text-base md:text-lg mb-8 leading-relaxed">Handcrafted pieces that define luxury and sophistication for every occasion.</p>
-                            <a href="{{ route('shop.index') }}" class="inline-flex items-center px-8 py-4 bg-[#2b0505] text-white font-semibold text-sm uppercase tracking-wider rounded hover:bg-[#D4AF37] hover:text-[#2b0505] transition-all duration-300 shadow-lg hover:shadow-xl">
-                                Shop Now
-                                <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
-                        <div class="relative">
-                            <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800" alt="Fashion" class="w-full h-[350px] md:h-[450px] lg:h-[550px] object-cover rounded-lg shadow-2xl">
-                            <div class="absolute -bottom-4 -right-4 w-24 h-24 bg-[#D4AF37]/20 rounded-full blur-2xl"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Navigation Arrows -->
-            <button class="hero-prev absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#2b0505] hover:bg-[#D4AF37] hover:text-white transition-all duration-300 z-10">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-            </button>
-            <button class="hero-next absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full shadow-lg flex items-center justify-center text-[#2b0505] hover:bg-[#D4AF37] hover:text-white transition-all duration-300 z-10">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-            </button>
-            
-            <!-- Dots Indicator -->
-            <div class="hero-dots absolute bottom-6 left-1/2 -translate-x-1/2 flex space-x-3 z-10">
-                <button class="dot active w-3 h-3 rounded-full bg-[#2b0505] transition-all duration-300" data-index="0"></button>
-                <button class="dot w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition-all duration-300" data-index="1"></button>
-                <button class="dot w-3 h-3 rounded-full bg-gray-300 hover:bg-gray-400 transition-all duration-300" data-index="2"></button>
-            </div>
-        </div>
-    </section>
-
-    <style>
-        .hero-slide {
-            display: none;
-            opacity: 0;
-            transition: opacity 0.6s ease-in-out;
-        }
-        .hero-slide.active {
-            display: block;
-            opacity: 1;
-        }
-        .dot.active {
-            width: 2rem;
-            border-radius: 9999px;
-        }
-    </style>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const slides = document.querySelectorAll('.hero-slide');
-            const dots = document.querySelectorAll('.dot');
-            const prevBtn = document.querySelector('.hero-prev');
-            const nextBtn = document.querySelector('.hero-next');
-            let currentSlide = 0;
-            let slideInterval;
-            const totalSlides = slides.length;
-
-            function showSlide(index) {
-                slides.forEach((slide, i) => {
-                    slide.classList.remove('active');
-                    dots[i].classList.remove('active');
-                    dots[i].style.width = '0.75rem';
-                    dots[i].style.borderRadius = '9999px';
-                });
-                
-                slides[index].classList.add('active');
-                dots[index].classList.add('active');
-                dots[index].style.width = '2rem';
-                dots[index].style.borderRadius = '9999px';
-                currentSlide = index;
-            }
-
-            function nextSlide() {
-                const next = (currentSlide + 1) % totalSlides;
-                showSlide(next);
-            }
-
-            function prevSlide() {
-                const prev = (currentSlide - 1 + totalSlides) % totalSlides;
-                showSlide(prev);
-            }
-
-            function startAutoSlide() {
-                slideInterval = setInterval(nextSlide, 3000);
-            }
-
-            function stopAutoSlide() {
-                clearInterval(slideInterval);
-            }
-
-            // Event listeners
-            nextBtn.addEventListener('click', () => {
-                stopAutoSlide();
-                nextSlide();
-                startAutoSlide();
-            });
-
-            prevBtn.addEventListener('click', () => {
-                stopAutoSlide();
-                prevSlide();
-                startAutoSlide();
-            });
-
-            dots.forEach((dot, index) => {
-                dot.addEventListener('click', () => {
-                    stopAutoSlide();
-                    showSlide(index);
-                    startAutoSlide();
-                });
-            });
-
-            // Start auto slide
-            startAutoSlide();
-        });
-    </script>
-
-    <!-- SHOP BY CATEGORY SECTION -->
-    <section class="w-full bg-white py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <!-- Section Title -->
-            <div class="text-center mb-10">
-                <h2 class="text-2xl md:text-3xl font-bold text-[#2b0505] mb-2">Shop by Category</h2>
-                <div class="w-16 h-1 bg-[#D4AF37] mx-auto rounded"></div>
-            </div>
-
-            <!-- Category Slider Container -->
-            <div class="relative">
-                <!-- Left Arrow -->
-                <button class="category-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-[#2b0505] hover:bg-[#D4AF37] hover:text-white transition-all duration-300">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                </button>
-
-                <!-- Right Arrow -->
-                <button class="category-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center text-[#2b0505] hover:bg-[#D4AF37] hover:text-white transition-all duration-300">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </button>
-
-                <!-- Categories Scroll Container -->
-                <div class="category-scroll-container overflow-x-auto scrollbar-hide px-8" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    <div class="category-items flex gap-6 py-4">
+    <!-- Mobile Hero Slider -->
+    @if(isset($banners) && $banners->count() > 0)
+    <section class="block md:hidden relative w-full bg-white overflow-hidden">
+        <div class="swiper mobile-hero-swiper">
+            <div class="swiper-wrapper">
+                @foreach($banners as $index => $banner)
+                <div class="swiper-slide">
+                    <div class="relative w-full min-h-[500px]">
+                        <!-- Background Image -->
+                        @if($banner->image)
+                            <img src="{{ asset('storage/' . $banner->image) }}" loading="lazy" decoding="async" 
+                                 class="absolute inset-0 w-full h-full object-cover" alt="{{ $banner->title }}">
+                        @else
+                            <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=600" 
+                                 class="absolute inset-0 w-full h-full object-cover" alt="Jewelry Product">
+                        @endif
                         
-                        <!-- Women Clothes -->
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
-                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
-                                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=200" alt="Women Clothes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <!-- Dark Overlay -->
+                        <div class="absolute inset-0 bg-black/20"></div>
+                        
+                        <!-- Content Overlay -->
+                        <div class="relative z-10 flex items-center h-full px-6 py-12">
+                            <div class="max-w-md">
+                                <!-- NEW ARRIVALS Tag -->
+                                <div class="flex items-center mb-4">
+                                    <div class="h-[1px] w-12 bg-white mr-4"></div>
+                                    <span class="text-white font-serif text-sm tracking-[0.3em] uppercase">NEW ARRIVALS</span>
+                                </div>
+                                
+                                <!-- Main Title -->
+                                <h1 class="text-3xl font-serif text-white mb-4 leading-tight font-bold">
+                                    {{ $banner->title ?? 'Night Spring Dresses' }}
+                                </h1>
+                                
+                                <!-- Shop Now Button -->
+                                <a href="{{ route('shop.index') }}" class="inline-flex items-center text-white font-serif text-sm uppercase tracking-[0.2em] hover:text-[#D4AF37] transition-colors duration-300 no-underline group">
+                                    Shop Now
+                                    <span class="ml-2 border-b border-white group-hover:border-[#D4AF37] transition-colors duration-300"></span>
+                                </a>
                             </div>
-                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Women Clothes</h3>
                         </div>
-
-                        <!-- Men Jeans -->
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
-                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
-                                <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&q=80&w=200" alt="Men Jeans" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Men Jeans</h3>
-                        </div>
-
-                        <!-- Shirts -->
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
-                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
-                                <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=200" alt="Shirts" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Shirts</h3>
-                        </div>
-
-                        <!-- Shoes -->
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
-                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
-                                <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=200" alt="Shoes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Shoes</h3>
-                        </div>
-
-                        <!-- Dresses -->
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
-                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
-                                <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=200" alt="Dresses" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Dresses</h3>
-                        </div>
-
-                        <!-- Kids -->
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
-                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
-                                <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&q=80&w=200" alt="Kids" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Kids</h3>
-                        </div>
-
-                        <!-- Tops -->
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
-                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
-                                <img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?auto=format&fit=crop&q=80&w=200" alt="Tops" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Tops</h3>
-                        </div>
-
-                        <!-- Pants -->
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer">
-                            <div class="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 shadow-md group-hover:shadow-xl group-hover:border-[#D4AF37] transition-all duration-300 mx-auto mb-3">
-                                <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&q=80&w=200" alt="Pants" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
-                            </div>
-                            <h3 class="text-sm font-medium text-gray-800 group-hover:text-[#D4AF37] transition-colors duration-300">Pants</h3>
-                        </div>
-
                     </div>
                 </div>
+                @endforeach
+            </div>
+        </div>
+        
+        <!-- Mobile Slider Pagination -->
+        <div class="absolute bottom-6 left-6 z-20">
+            <div class="flex items-center text-white text-sm font-serif space-x-3">
+                @foreach($banners as $index => $banner)
+                    <button class="mobile-pagination-number flex items-center transition-colors duration-300 {{ $index === 0 ? 'text-white' : 'text-white/50 hover:text-white' }}" 
+                            data-slide-to="{{ $index }}">
+                        <span class="number">{{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}</span>
+                        @if($index < $banners->count() - 1)
+                            <span class="line ml-2 h-[1px] w-6 bg-current transition-all duration-300 {{ $index === 0 ? 'w-8' : 'w-6' }}"></span>
+                        @endif
+                    </button>
+                @endforeach
             </div>
         </div>
     </section>
+    @endif
 
-    <!-- Category Slider JavaScript -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const scrollContainer = document.querySelector('.category-scroll-container');
-            const prevBtn = document.querySelector('.category-prev');
-            const nextBtn = document.querySelector('.category-next');
-            const scrollAmount = 200;
+    <!-- Main Banner Section -->
+    @if(isset($banners) && $banners->count() > 0)
+    <section class="hidden md:block relative w-full bg-white overflow-hidden">
+        <div class="swiper main-banner-swiper">
+            <div class="swiper-wrapper">
+                @foreach($banners as $index => $banner)
+                <div class="swiper-slide">
+                    <div class="grid grid-cols-1 lg:grid-cols-2 w-full min-h-[500px] lg:min-h-[600px]">
+                        <!-- Left Side: Text Content -->
+                        <div class="flex items-center justify-center lg:justify-start px-6 sm:px-12 lg:px-20 py-12 lg:py-0">
+                            <div class="max-w-lg">
+                                <!-- NEW ARRIVALS Tag with Line -->
+                                <div class="flex items-center mb-6">
+                                    <div class="h-[1px] w-12 bg-[#2b0505] mr-4"></div>
+                                    <span class="text-[#2b0505] font-bold text-sm uppercase tracking-[0.2em]">NEW ARRIVALS</span>
+                                </div>
+                                
+                                <!-- Main Title -->
+                                <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-[#2b0505] mb-6 leading-tight" style="font-family: 'Playfair Display', serif;">
+                                    {{ $banner->title }}
+                                </h1>
+                                
+                                <!-- Description -->
+                                <p class="text-gray-600 text-base md:text-lg mb-8 leading-relaxed">
+                                    {{ $banner->line_2 ?? 'Discover our latest collection of exquisite jewelry pieces crafted with precision and elegance.' }}
+                                </p>
+                                
+                                <!-- Shop Now Link with Underline -->
+                                <a href="{{ route('shop.index') }}" class="inline-flex items-center text-[#2b0505] font-bold text-sm uppercase tracking-[0.1em] hover:text-[#D4AF37] transition-colors duration-300 no-underline group">
+                                    Shop Now
+                                    <span class="ml-2 border-b-2 border-[#2b0505] group-hover:border-[#D4AF37] transition-colors duration-300"></span>
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Right Side: Product Image -->
+                        <div class="flex items-center justify-center lg:justify-end px-6 sm:px-12 lg:px-20 py-12 lg:py-0">
+                            <div class="w-full max-w-md lg:max-w-lg">
+                                @if($banner->image)
+                                    <img src="{{ asset('storage/' . $banner->image) }}" loading="lazy" decoding="async" 
+                                         class="w-full h-auto object-cover rounded-lg shadow-lg" alt="{{ $banner->title }}">
+                                @else
+                                    <img src="https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=600" 
+                                         class="w-full h-auto object-cover rounded-lg shadow-lg" alt="Jewelry Product">
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+        
+        <!-- Slide Numbers -->
+        <div class="absolute bottom-6 left-6 sm:left-12 lg:left-20">
+            <div class="flex items-center text-[#2b0505] text-sm font-medium">
+                @foreach($banners as $index => $banner)
+                    <span class="flex items-center">
+                        {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+                        @if($index < $banners->count() - 1)
+                            <span class="mx-2">—</span>
+                        @endif
+                    </span>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
 
-            prevBtn.addEventListener('click', function() {
-                scrollContainer.scrollBy({
-                    left: -scrollAmount,
-                    behavior: 'smooth'
-                });
+    @if(isset($categories) && $categories->count() > 0)
+    <section class="py-12 bg-white" id="collection">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <p class="text-[10px] tracking-[0.25em] uppercase text-[#D4AF37] font-bold mb-2">Our Collections</p>
+                <h2 class="serif text-2xl md:text-3xl text-[#2b0505]">Shop by Category</h2>
+            </div>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4 md:gap-6">
+                @foreach($categories as $category)
+                <a href="{{ route('category.show', $category->slug) }}" class="group no-underline block text-center">
+                    <div class="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full overflow-hidden bg-[#FCF9F5] border border-black/5 mb-3 mx-auto group-hover:shadow-lg transition-all duration-300">
+                        @if($category->image)
+                            <img src="{{ asset('storage/' . $category->image) }}" loading="lazy" decoding="async" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="{{ $category->name }}">
+                        @else
+                            <div class="w-full h-full flex items-center justify-center text-black/20">
+                                <i class="bi bi-grid-3x3-gap text-2xl md:text-3xl"></i>
+                            </div>
+                        @endif
+                    </div>
+                    <h6 class="text-[9px] md:text-[10px] font-bold tracking-widest uppercase text-black/80 group-hover:text-[#D4AF37] transition-colors">{{ $category->name }}</h6>
+                </a>
+                @endforeach
+            </div>
+        </div>
+    </section>
+    @endif
+
+    <section class="py-8 bg-[#FCF9F5]">
+        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <p class="text-[10px] tracking-[0.25em] uppercase text-[#D4AF37] font-bold mb-2">Featured</p>
+                <h2 class="serif text-2xl md:text-3xl text-[#2b0505] mb-2">Masterpieces</h2>
+                <p class="text-sm text-black/50">Most loved traditional pieces this week</p>
+            </div>
+
+            {{-- Product Grid --}}
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                @foreach($products->take(12) as $product)
+                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500 border border-black/5 group">
+                        <div class="h-48 md:h-56 overflow-hidden relative">
+                            <img src="{{ $product->image ? asset('storage/' . $product->image) : 'https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=1000' }}" loading="lazy" decoding="async" 
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="{{ $product->name }}">
+                            
+                            @if($product->categoryRel)
+                                <div class="absolute top-2 left-2">
+                                    <span class="bg-white/90 backdrop-blur-sm text-[#2b0505] text-[7px] font-bold uppercase tracking-widest px-1.5 py-0.5 rounded-full shadow-sm">
+                                        {{ $product->categoryRel->name }}
+                                    </span>
+                                </div>
+                            @endif
+
+                            @if($product->sale_price)
+                                <span class="absolute top-2 right-2 bg-[#800000] text-white text-[7px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded shadow-md">SALE</span>
+                            @endif
+
+                            <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <form action="{{ route('cart.add') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="bg-white text-[#2b0505] h-8 w-8 rounded-full flex items-center justify-center shadow-lg transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 hover:bg-[#D4AF37] hover:text-white">
+                                        <i class="bi bi-cart-plus text-sm"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="p-3 text-center">
+                            <h5 class="serif text-xs text-[#2b0505] mb-1 font-medium leading-tight line-clamp-2 text-center">{{ $product->name }}</h5>
+                            <div class="flex items-center justify-center gap-1 mb-3">
+                                @if($product->sale_price)
+                                    <span class="text-gray-400 text-xs line-through">₹{{ number_format($product->regular_price, 0) }}</span>
+                                    <span class="text-[#D4AF37] font-bold text-xs">₹{{ number_format($product->sale_price, 0) }}</span>
+                                @else
+                                    <span class="text-[#D4AF37] font-bold text-xs">₹{{ number_format($product->regular_price ?? $product->price, 0) }}</span>
+                                @endif
+                            </div>
+                            <div class="grid grid-cols-2 gap-1.5">
+                                <form action="{{ route('cart.add') }}" method="POST" class="contents">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <button type="submit" class="py-1.5 text-[7px] font-bold tracking-[0.2em] uppercase bg-[#2b0505] text-white rounded-md hover:bg-[#4a0a0a] transition-all">
+                                        ADD TO CART
+                                    </button>
+                                </form>
+                                <a href="{{ route('product.details', $product->slug) }}" class="py-1.5 text-[7px] font-bold tracking-[0.2em] uppercase border border-black/10 text-black/60 bg-white rounded-md hover:bg-black/5 transition-all no-underline flex items-center justify-center">
+                                    DETAILS
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+@endsection
+
+@push('scripts')
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Initialize Mobile Hero Slider
+        const mobileHeroSwiper = new Swiper('.mobile-hero-swiper', {
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            effect: 'slide',
+            speed: 800,
+            allowTouchMove: true,
+        });
+
+        // Mobile Custom Pagination
+        const mobilePaginationButtons = document.querySelectorAll('.mobile-pagination-number');
+        let mobileCurrentIndex = 0;
+
+        function updateMobilePagination(index) {
+            mobilePaginationButtons.forEach((button, i) => {
+                const number = button.querySelector('.number');
+                const line = button.querySelector('.line');
+                
+                if (i === index) {
+                    number.classList.add('text-white');
+                    number.classList.remove('text-white/50');
+                    if (line) {
+                        line.classList.add('w-8');
+                        line.classList.remove('w-6');
+                    }
+                } else {
+                    number.classList.remove('text-white');
+                    number.classList.add('text-white/50');
+                    if (line) {
+                        line.classList.remove('w-8');
+                        line.classList.add('w-6');
+                    }
+                }
             });
+            mobileCurrentIndex = index;
+        }
 
-            nextBtn.addEventListener('click', function() {
-                scrollContainer.scrollBy({
-                    left: scrollAmount,
-                    behavior: 'smooth'
-                });
+        // Mobile pagination button clicks
+        mobilePaginationButtons.forEach((button, index) => {
+            button.addEventListener('click', () => {
+                mobileHeroSwiper.slideTo(index);
+                updateMobilePagination(index);
             });
         });
-    </script>
 
-@endsection
+        // Update mobile pagination on slide change
+        mobileHeroSwiper.on('slideChange', () => {
+            updateMobilePagination(mobileHeroSwiper.realIndex);
+        });
+
+        // Initialize mobile pagination
+        updateMobilePagination(0);
+
+        // Initialize Main Banner Slider
+        const mainBannerSwiper = new Swiper('.main-banner-swiper', {
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            effect: 'slide',
+            speed: 800,
+            allowTouchMove: true,
+        });
+
+        const slider = document.getElementById('premium-slider');
+        if (!slider) return;
+
+        const slides = slider.querySelectorAll('.slide');
+        const pagButtons = slider.querySelectorAll('.pagination-number');
+        let currentIndex = 0;
+        let intervalId;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => {
+                slide.classList.remove('opacity-100', 'z-10', 'active');
+                if (i === index) {
+                    slide.classList.add('opacity-100', 'z-10', 'active');
+                }
+            });
+            pagButtons.forEach((button, i) => {
+                const number = button.querySelector('.number');
+                const line = button.querySelector('.line');
+                if (i === index) {
+                    number.classList.add('text-[#D4AF37]', 'active');
+                    number.classList.remove('text-black/30');
+                    line.classList.add('w-full');
+                } else {
+                    number.classList.remove('text-[#D4AF37]', 'active');
+                    number.classList.add('text-black/30');
+                    line.classList.remove('w-full');
+                }
+            });
+            currentIndex = index;
+        }
+
+        function nextSlide() {
+            const nextIndex = (currentIndex + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        function startAutoplay() {
+            intervalId = setInterval(nextSlide, 5000); // Change slide every 5 seconds
+        }
+
+        function stopAutoplay() {
+            clearInterval(intervalId);
+        }
+
+        pagButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const slideIndex = parseInt(button.dataset.slideTo, 10);
+                showSlide(slideIndex);
+                stopAutoplay();
+                startAutoplay(); // Restart autoplay after manual navigation
+            });
+        });
+
+        // Initial setup
+        showSlide(0);
+        startAutoplay();
+
+        // Initialize Product Slider
+        // Removed - now using static grid
+
+        // Add to Cart Function
+        window.addToCart = function(productId) {
+            fetch("{{ route('cart.add') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ product_id: productId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Product added to bag!');
+                    // Update cart count in header if needed
+                    const cartCountElement = document.querySelector('.cart-count');
+                    if (cartCountElement) {
+                        cartCountElement.innerText = data.cart_count;
+                    }
+                }
+            });
+        }
+
+        // Product Swiper Initialization
+        const productSwiper = new Swiper('.product-swiper', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            autoplay: {
+                delay: 4000,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination-custom',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next-custom',
+                prevEl: '.swiper-button-prev-custom',
+            },
+            breakpoints: {
+                640: {
+                    slidesPerView: 2,
+                },
+                1024: {
+                    slidesPerView: 3,
+                },
+                1280: {
+                    slidesPerView: 4,
+                },
+            }
+        });
+    });
+</script>
+@endpush
