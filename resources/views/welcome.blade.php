@@ -4,12 +4,13 @@
 
 @section('content')
     <!-- HERO SLIDER SECTION -->
-    <section class="relative w-full bg-white overflow-hidden">
+    <section class="relative w-screen bg-white overflow-hidden">
         <div class="hero-slider">
             
             <!-- Slide 1 -->
             <div class="hero-slide active" data-slide="0">
-                <div class="flex flex-col md:flex-row items-center min-h-[600px] lg:min-h-[700px]">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-center min-h-[600px] lg:min-h-[700px]">
                     <!-- Left: Text -->
                     <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1">
                         <div class="max-w-lg">
@@ -22,14 +23,16 @@
                     </div>
                     <!-- Right: Image -->
                     <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
-                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800" alt="Fashion Model" class="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800" alt="Fashion Model" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
                     </div>
+                </div>
                 </div>
             </div>
             
             <!-- Slide 2 -->
             <div class="hero-slide" data-slide="1">
-                <div class="flex flex-col md:flex-row items-center min-h-[600px] lg:min-h-[700px]">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-center min-h-[600px] lg:min-h-[700px]">
                     <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1">
                         <div class="max-w-lg">
                             <span class="text-xs font-medium text-[#D4AF37] uppercase tracking-[0.3em] mb-4 block">Trending</span>
@@ -40,14 +43,16 @@
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
-                        <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&q=80&w=800" alt="Fashion Model" class="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover">
+                        <img src="https://images.unsplash.com/photo-1617038260897-41a1f14a8ca0?auto=format&fit=crop&q=80&w=800" alt="Fashion Model" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
                     </div>
+                </div>
                 </div>
             </div>
             
             <!-- Slide 3 -->
             <div class="hero-slide" data-slide="2">
-                <div class="flex flex-col md:flex-row items-center min-h-[600px] lg:min-h-[700px]">
+                <div class="max-w-7xl mx-auto">
+                    <div class="flex flex-col md:flex-row items-center min-h-[600px] lg:min-h-[700px]">
                     <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1">
                         <div class="max-w-lg">
                             <span class="text-xs font-medium text-[#D4AF37] uppercase tracking-[0.3em] mb-4 block">Exclusive</span>
@@ -58,8 +63,9 @@
                         </div>
                     </div>
                     <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
-                        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800" alt="Fashion Model" class="w-full h-[400px] md:h-[500px] lg:h-[600px] object-cover">
+                        <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&q=80&w=800" alt="Fashion Model" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
                     </div>
+                </div>
                 </div>
             </div>
             
@@ -104,7 +110,7 @@
                 
                 <!-- Categories Scroll -->
                 <div class="category-scroll overflow-x-auto scrollbar-hide px-8" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    <div class="category-track flex gap-8 py-4">
+                    <div class="category-track flex gap-8 py-4 justify-center">
                         
                         <!-- Men Shirts -->
                         <div class="category-item flex-shrink-0 text-center group cursor-pointer w-28">
