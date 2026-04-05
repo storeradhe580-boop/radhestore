@@ -53,6 +53,11 @@ Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categ
 Route::get('/product/{slug}', [ProductController::class, 'show'])->name('product.show');
 Route::get('/product/{slug}/details', [ProductController::class, 'show'])->name('product.details');
 
+// Product CRUD Routes
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+
 Route::get('/about', function () {
     return view('about');
 })->name('about');
