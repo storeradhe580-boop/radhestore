@@ -110,7 +110,7 @@
                         <a href="{{ route('category.show', $category->slug) }}" class="category-item flex-shrink-0 text-center group cursor-pointer w-28 no-underline">
                             <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-50 mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
                                 @if($category->image)
-                                    <img src="{{ $category->image }}" alt="{{ $category->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                                    <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 @else
                                     <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=200" alt="{{ $category->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 @endif
