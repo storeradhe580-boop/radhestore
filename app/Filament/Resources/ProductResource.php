@@ -169,25 +169,20 @@ class ProductResource extends Resource
             ImageColumn::make('image')
                 ->label('image')
                 ->circular()
-                ->defaultImageUrl('https://res.cloudinary.com/demo/image/upload/v1/default-product.jpg')
+                ->disk('public')
+                ->size(60)
                 ->getStateUsing(function ($record) {
                     if (!$record->image) {
-                        return 'https://res.cloudinary.com/demo/image/upload/v1/default-product.jpg';
+                        return asset('images/default-product.jpg');
                     }
                     
-                    // Check if image is a full URL (Cloudinary)
+                    // Check if image is a full URL
                     if (str_starts_with($record->image, 'http')) {
                         return $record->image;
                     }
                     
-                    // Check if image is a local path
-                    $fullPath = storage_path('app/public/products/' . $record->image);
-                    if (file_exists($fullPath)) {
-                        return asset('storage/products/' . $record->image);
-                    }
-                    
-                    // Fallback
-                    return 'https://res.cloudinary.com/demo/image/upload/v1/default-product.jpg';
+                    // Return storage path
+                    return asset('storage/' . $record->image);
                 }),
 
             // 2. નામ

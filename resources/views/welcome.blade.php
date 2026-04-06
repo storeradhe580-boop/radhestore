@@ -25,7 +25,7 @@
                             @if($banner->image)
                                 <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
                             @else
-                                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800" alt="Fashion Model" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
+                                <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
                             @endif
                         </div>
                     </div>
@@ -46,7 +46,7 @@
                             </div>
                         </div>
                         <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
-                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=800" alt="Fashion Model" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
+                            <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
                         </div>
                     </div>
                 </div>
@@ -188,7 +188,7 @@
                 @forelse($products->take(8) as $product)
                     <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500 border border-black/5 group">
                         <div class="h-48 md:h-56 overflow-hidden relative">
-                            <img src="{{ $product->image ? asset('storage/' . $product->image) : 'https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=1000' }}" loading="lazy" decoding="async" 
+                            <img src="{{ $product->image ? asset('storage/' . $product->image) : asset('images/default-product.jpg') }}" loading="lazy" decoding="async" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="{{ $product->name }}">
                             
                             @if($product->category)
