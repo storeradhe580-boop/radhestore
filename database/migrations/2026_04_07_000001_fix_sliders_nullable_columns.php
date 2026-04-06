@@ -1,0 +1,25 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    public function up(): void
+    {
+        Schema::table('sliders', function (Blueprint $table) {
+            // Make line_1 and line_2 nullable to match form
+            $table->string('line_1')->nullable()->change();
+            $table->string('line_2')->nullable()->change();
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('sliders', function (Blueprint $table) {
+            $table->string('line_1')->change();
+            $table->string('line_2')->change();
+        });
+    }
+};

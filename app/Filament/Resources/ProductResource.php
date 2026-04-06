@@ -75,12 +75,13 @@ class ProductResource extends Resource
                             FileUpload::make('image')
                             ->label('Upload images')
                             ->image()
-                            ->disk('public') // 👈 FIX
+                            ->disk('public')
                             ->directory('products')
                             ->visibility('public')
-                            ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png'])
+                            ->acceptedFileTypes(['image/jpeg', 'image/jpg', 'image/png', 'image/webp'])
                             ->maxSize(2048)
-                            ->required(),
+                            ->required()
+                            ->preserveFilenames(),
                             Grid::make(2)->schema([
                                 TextInput::make('regular_price')
                                     ->numeric()

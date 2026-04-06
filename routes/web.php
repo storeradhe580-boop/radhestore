@@ -17,6 +17,8 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderTrackController;
 use App\Http\Controllers\ImageUploadController;
+use App\Http\Controllers\Admin\SliderController as AdminSliderController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -167,7 +169,24 @@ Route::get('/debug-categories', function () {
     return response()->json($debug);
 });
 
-// Debug Slider Images Route
+// Admin Routes for Slider and Product Management
+Route::prefix('admin')->name('admin.')->group(function () {
+    // Slider Routes
+    Route::get('/sliders', [AdminSliderController::class, 'index'])->name('sliders.index');
+    Route::get('/sliders/create', [AdminSliderController::class, 'create'])->name('sliders.create');
+    Route::post('/sliders', [AdminSliderController::class, 'store'])->name('sliders.store');
+    Route::get('/sliders/{slider}/edit', [AdminSliderController::class, 'edit'])->name('sliders.edit');
+    Route::put('/sliders/{slider}', [AdminSliderController::class, 'update'])->name('sliders.update');
+    Route::delete('/sliders/{slider}', [AdminSliderController::class, 'destroy'])->name('sliders.destroy');
+    
+    // Product Routes
+    Route::get('/products', [AdminProductController::class, 'index'])->name('products.index');
+    Route::get('/products/create', [AdminProductController::class, 'create'])->name('products.create');
+    Route::post('/products', [AdminProductController::class, 'store'])->name('products.store');
+    Route::get('/products/{product}/edit', [AdminProductController::class, 'edit'])->name('products.edit');
+    Route::put('/products/{product}', [AdminProductController::class, 'update'])->name('products.update');
+    Route::delete('/products/{product}', [AdminProductController::class, 'destroy'])->name('products.destroy');
+});
 Route::get('/debug-sliders', function () {
     $sliders = \App\Models\Slider::all();
     

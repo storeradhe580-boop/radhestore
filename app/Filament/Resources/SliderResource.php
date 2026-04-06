@@ -36,10 +36,12 @@ class SliderResource extends Resource
 
             TextInput::make('line_1')
                 ->label('Line 1')
+                ->nullable()
                 ->helperText('First line of text (optional)'),
 
             TextInput::make('line_2')
                 ->label('Line 2')
+                ->nullable()
                 ->helperText('Second line of text (optional)'),
 
             FileUpload::make('image')
@@ -48,10 +50,11 @@ class SliderResource extends Resource
                 ->disk('public')
                 ->directory('sliders')
                 ->visibility('public')
-                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp', 'image/jpg'])
                 ->maxSize(5120)
                 ->helperText('Upload slider banner image. Max size: 5MB')
-                ->required(),
+                ->required()
+                ->preserveFilenames(),
         ])->columns(1);
     }
 
