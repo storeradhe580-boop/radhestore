@@ -11,6 +11,9 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Widgets;
+use App\Filament\Resources\ProductResource;
+use App\Filament\Resources\CategoryResource;
+use App\Filament\Resources\SliderResource;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -30,6 +33,11 @@ class AdminPanelProvider extends PanelProvider
             ->brandName('Radhe Store')
             ->colors([
                 'primary' => Color::Amber,
+            ])
+            ->resources([
+                ProductResource::class,
+                CategoryResource::class,
+                SliderResource::class,
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
