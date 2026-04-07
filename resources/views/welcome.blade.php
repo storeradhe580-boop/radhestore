@@ -9,10 +9,10 @@
             @forelse($banners as $index => $banner)
             <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index }}">
                 <div class="max-w-7xl mx-auto">
-                    <div class="flex flex-col md:flex-row items-center min-h-[600px] lg:min-h-[700px]">
+                    <div class="grid grid-cols-1 md:grid-cols-2 items-center min-h-[600px] lg:min-h-[700px]">
                         <!-- Left: Text -->
-                        <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1">
-                            <div class="max-w-lg">
+                        <div class="w-full px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1 text-center md:text-left">
+                            <div class="max-w-lg mx-auto md:mx-0">
                                 <span class="text-xs font-medium text-[#D4AF37] uppercase tracking-[0.3em] mb-4 block">{{ $banner->subtitle ?? 'New Arrivals' }}</span>
                                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-6 leading-[1.1]">{{ $banner->title ?? 'Night Spring Dresses' }}</h1>
                                 <a href="{{ route('shop.index') }}" class="inline-flex items-center text-sm font-medium text-[#2b0505] uppercase tracking-wider border-b-2 border-[#2b0505] pb-1 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-colors duration-300">
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <!-- Right: Image -->
-                        <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
+                        <div class="w-full px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
                             @if($banner->image)
                                 <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
                             @else
@@ -35,9 +35,9 @@
             <!-- Fallback Static Slide when no banners -->
             <div class="hero-slide active" data-slide="0">
                 <div class="max-w-7xl mx-auto">
-                    <div class="flex flex-col md:flex-row items-center min-h-[600px] lg:min-h-[700px]">
-                        <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1">
-                            <div class="max-w-lg">
+                    <div class="grid grid-cols-1 md:grid-cols-2 items-center min-h-[600px] lg:min-h-[700px]">
+                        <div class="w-full px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1 text-center md:text-left">
+                            <div class="max-w-lg mx-auto md:mx-0">
                                 <span class="text-xs font-medium text-[#D4AF37] uppercase tracking-[0.3em] mb-4 block">New Arrivals</span>
                                 <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-6 leading-[1.1]">Night Spring Dresses</h1>
                                 <a href="{{ route('shop.index') }}" class="inline-flex items-center text-sm font-medium text-[#2b0505] uppercase tracking-wider border-b-2 border-[#2b0505] pb-1 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-colors duration-300">
@@ -45,7 +45,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="w-full md:w-1/2 px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
+                        <div class="w-full px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
                             <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
                         </div>
                     </div>
