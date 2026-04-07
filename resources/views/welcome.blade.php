@@ -9,23 +9,23 @@
             @forelse($banners as $index => $banner)
             <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index }}">
                 <div class="max-w-7xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-2 items-center min-h-[600px] lg:min-h-[700px]">
+                    <div class="grid grid-cols-2 items-center min-h-[400px] md:min-h-[600px] lg:min-h-[700px]">
                         <!-- Left: Text -->
-                        <div class="w-full px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1 text-center md:text-left">
-                            <div class="max-w-lg mx-auto md:mx-0">
-                                <span class="text-xs font-medium text-[#D4AF37] uppercase tracking-[0.3em] mb-4 block">{{ $banner->subtitle ?? 'New Arrivals' }}</span>
-                                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-6 leading-[1.1]">{{ $banner->title ?? 'Night Spring Dresses' }}</h1>
-                                <a href="{{ route('shop.index') }}" class="inline-flex items-center text-sm font-medium text-[#2b0505] uppercase tracking-wider border-b-2 border-[#2b0505] pb-1 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-colors duration-300">
+                        <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-8 md:py-0 order-1 text-left">
+                            <div class="max-w-lg">
+                                <span class="text-[10px] md:text-xs font-medium text-[#D4AF37] uppercase tracking-[0.2em] md:tracking-[0.3em] mb-2 md:mb-4 block">{{ $banner->subtitle ?? 'New Arrivals' }}</span>
+                                <h1 class="text-xl sm:text-2xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-3 md:mb-6 leading-[1.1]">{{ $banner->title ?? 'Night Spring Dresses' }}</h1>
+                                <a href="{{ route('shop.index') }}" class="inline-flex items-center text-xs md:text-sm font-medium text-[#2b0505] uppercase tracking-wider border-b-2 border-[#2b0505] pb-1 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-colors duration-300">
                                     Shop Now
                                 </a>
                             </div>
                         </div>
                         <!-- Right: Image -->
-                        <div class="w-full px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
+                        <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-4 md:py-0 order-2">
                             @if($banner->image)
-                                <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
+                                <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-[400px] md:h-[600px] lg:h-[700px] object-cover object-top">
                             @else
-                                <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
+                                <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-[400px] md:h-[600px] lg:h-[700px] object-cover object-top">
                             @endif
                         </div>
                     </div>
@@ -35,18 +35,18 @@
             <!-- Fallback Static Slide when no banners -->
             <div class="hero-slide active" data-slide="0">
                 <div class="max-w-7xl mx-auto">
-                    <div class="grid grid-cols-1 md:grid-cols-2 items-center min-h-[600px] lg:min-h-[700px]">
-                        <div class="w-full px-6 sm:px-12 lg:px-20 py-12 md:py-0 order-2 md:order-1 text-center md:text-left">
-                            <div class="max-w-lg mx-auto md:mx-0">
-                                <span class="text-xs font-medium text-[#D4AF37] uppercase tracking-[0.3em] mb-4 block">New Arrivals</span>
-                                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-6 leading-[1.1]">Night Spring Dresses</h1>
-                                <a href="{{ route('shop.index') }}" class="inline-flex items-center text-sm font-medium text-[#2b0505] uppercase tracking-wider border-b-2 border-[#2b0505] pb-1 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-colors duration-300">
+                    <div class="grid grid-cols-2 items-center min-h-[400px] md:min-h-[600px] lg:min-h-[700px]">
+                        <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-8 md:py-0 order-1 text-left">
+                            <div class="max-w-lg">
+                                <span class="text-[10px] md:text-xs font-medium text-[#D4AF37] uppercase tracking-[0.2em] md:tracking-[0.3em] mb-2 md:mb-4 block">New Arrivals</span>
+                                <h1 class="text-xl sm:text-2xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-3 md:mb-6 leading-[1.1]">Night Spring Dresses</h1>
+                                <a href="{{ route('shop.index') }}" class="inline-flex items-center text-xs md:text-sm font-medium text-[#2b0505] uppercase tracking-wider border-b-2 border-[#2b0505] pb-1 hover:text-[#D4AF37] hover:border-[#D4AF37] transition-colors duration-300">
                                     Shop Now
                                 </a>
                             </div>
                         </div>
-                        <div class="w-full px-6 sm:px-12 lg:px-20 py-8 md:py-0 order-1 md:order-2">
-                            <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-[600px] lg:h-[700px] object-cover object-top">
+                        <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-4 md:py-0 order-2">
+                            <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-[400px] md:h-[600px] lg:h-[700px] object-cover object-top">
                         </div>
                     </div>
                 </div>
