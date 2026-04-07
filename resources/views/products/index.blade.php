@@ -25,10 +25,10 @@
             @endif
 
             <!-- Product Grid -->
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-6">
                 @forelse($products as $product)
-                    <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500 border border-black/5 group">
-                        <div class="h-48 md:h-56 overflow-hidden relative">
+                    <div class="bg-white rounded-lg md:rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-500 border border-black/5 group flex flex-col">
+                        <div class="aspect-square overflow-hidden relative bg-gray-100">
                             <img src="{{ $product->image ? asset('storage/' . $product->image) : 'https://images.unsplash.com/photo-1610216705422-caa3fcb6d158?auto=format&fit=crop&q=80&w=1000' }}" loading="lazy" decoding="async" 
                                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" alt="{{ $product->name }}">
                             
@@ -61,33 +61,33 @@
                                 @endauth
                             </div>
                         </div>
-                        <div class="p-3 text-center">
-                            <h5 class="serif text-xs text-[#2b0505] mb-1 font-medium leading-tight line-clamp-2 text-center">{{ $product->name }}</h5>
-                            <div class="flex items-center justify-center gap-1 mb-3">
+                        <div class="p-2 md:p-3 flex flex-col flex-grow">
+                            <h5 class="serif text-[10px] md:text-xs text-[#2b0505] mb-1 font-medium leading-tight line-clamp-2 text-center min-h-[2.5em]">{{ $product->name }}</h5>
+                            <div class="flex items-center justify-center gap-1 mb-2 md:mb-3">
                                 @if($product->sale_price)
-                                    <span class="text-gray-400 text-xs line-through">₹{{ number_format($product->regular_price, 0) }}</span>
-                                    <span class="text-[#D4AF37] font-bold text-xs">₹{{ number_format($product->sale_price, 0) }}</span>
+                                    <span class="text-gray-400 text-[10px] md:text-xs line-through">₹{{ number_format($product->regular_price, 0) }}</span>
+                                    <span class="text-[#D4AF37] font-bold text-[10px] md:text-xs">₹{{ number_format($product->sale_price, 0) }}</span>
                                 @else
-                                    <span class="text-[#D4AF37] font-bold text-xs">₹{{ number_format($product->regular_price ?? $product->price, 0) }}</span>
+                                    <span class="text-[#D4AF37] font-bold text-[10px] md:text-xs">₹{{ number_format($product->regular_price ?? $product->price, 0) }}</span>
                                 @endif
                             </div>
-                            <div class="grid grid-cols-2 gap-1.5">
+                            <div class="grid grid-cols-2 gap-1 md:gap-1.5 mt-auto">
                                 @auth
                                 <form action="{{ route('cart.add') }}" method="POST" class="contents">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
                                     <input type="hidden" name="quantity" value="1">
-                                    <button type="submit" class="py-1.5 text-[7px] font-bold tracking-[0.2em] uppercase bg-[#2b0505] text-white rounded-md hover:bg-[#4a0a0a] transition-all">
-                                        ADD TO CART
+                                    <button type="submit" class="py-1.5 md:py-2 text-[6px] md:text-[7px] font-bold tracking-[0.15em] md:tracking-[0.2em] uppercase bg-[#2b0505] text-white rounded hover:bg-[#4a0a0a] transition-all">
+                                        ADD
                                     </button>
                                 </form>
                                 @else
-                                <a href="{{ route('login') }}" class="py-1.5 text-[7px] font-bold tracking-[0.2em] uppercase bg-[#2b0505] text-white rounded-md hover:bg-[#4a0a0a] transition-all flex items-center justify-center">
+                                <a href="{{ route('login') }}" class="py-1.5 md:py-2 text-[6px] md:text-[7px] font-bold tracking-[0.15em] md:tracking-[0.2em] uppercase bg-[#2b0505] text-white rounded hover:bg-[#4a0a0a] transition-all flex items-center justify-center">
                                     LOGIN
                                 </a>
                                 @endauth
-                                <a href="{{ route('product.details', $product->slug) }}" class="py-1.5 text-[7px] font-bold tracking-[0.2em] uppercase border border-black/10 text-black/60 bg-white rounded-md hover:bg-black/5 transition-all no-underline flex items-center justify-center">
-                                    DETAILS
+                                <a href="{{ route('product.details', $product->slug) }}" class="py-1.5 md:py-2 text-[6px] md:text-[7px] font-bold tracking-[0.15em] md:tracking-[0.2em] uppercase border border-black/10 text-black/60 bg-white rounded hover:bg-black/5 transition-all no-underline flex items-center justify-center">
+                                    VIEW
                                 </a>
                             </div>
                         </div>
