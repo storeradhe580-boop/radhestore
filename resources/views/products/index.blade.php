@@ -45,6 +45,7 @@
                             @endif
 
                             <div class="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                @auth
                                 <form action="{{ route('cart.add') }}" method="POST">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -53,6 +54,11 @@
                                         <i class="bi bi-cart-plus text-sm"></i>
                                     </button>
                                 </form>
+                                @else
+                                <a href="{{ route('login') }}" class="bg-white text-[#2b0505] h-8 w-8 rounded-full flex items-center justify-center shadow-lg transform translate-y-10 group-hover:translate-y-0 transition-transform duration-500 hover:bg-[#D4AF37] hover:text-white">
+                                    <i class="bi bi-cart-plus text-sm"></i>
+                                </a>
+                                @endauth
                             </div>
                         </div>
                         <div class="p-3 text-center">
@@ -66,6 +72,7 @@
                                 @endif
                             </div>
                             <div class="grid grid-cols-2 gap-1.5">
+                                @auth
                                 <form action="{{ route('cart.add') }}" method="POST" class="contents">
                                     @csrf
                                     <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -74,6 +81,11 @@
                                         ADD TO CART
                                     </button>
                                 </form>
+                                @else
+                                <a href="{{ route('login') }}" class="py-1.5 text-[7px] font-bold tracking-[0.2em] uppercase bg-[#2b0505] text-white rounded-md hover:bg-[#4a0a0a] transition-all flex items-center justify-center">
+                                    LOGIN
+                                </a>
+                                @endauth
                                 <a href="{{ route('product.details', $product->slug) }}" class="py-1.5 text-[7px] font-bold tracking-[0.2em] uppercase border border-black/10 text-black/60 bg-white rounded-md hover:bg-black/5 transition-all no-underline flex items-center justify-center">
                                     DETAILS
                                 </a>

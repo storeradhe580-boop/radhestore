@@ -51,6 +51,7 @@
 
                 {{-- Add to Cart --}}
                 <div class="pt-6 border-t border-black/10">
+                    @auth
                     <form action="{{ route('cart.add') }}" method="POST" class="space-y-4">
                         @csrf
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
@@ -72,6 +73,26 @@
                             Add to Cart
                         </button>
                     </form>
+                    @else
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4">
+                            <label class="text-sm font-semibold text-[#2b0505]">Quantity:</label>
+                            <div class="flex items-center border border-black/10 rounded-xl overflow-hidden">
+                                <button type="button" onclick="this.parentElement.querySelector('input').stepDown()" class="px-4 py-2 bg-white hover:bg-gray-50 transition-colors">
+                                    <i class="bi bi-dash"></i>
+                                </button>
+                                <input type="number" name="quantity" value="1" min="1" max="{{ $product->quantity }}" class="w-16 text-center border-x border-black/10 py-2 outline-none" disabled>
+                                <button type="button" onclick="this.parentElement.querySelector('input').stepUp()" class="px-4 py-2 bg-white hover:bg-gray-50 transition-colors">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <a href="{{ route('login') }}" class="block w-full py-4 bg-[#2b0505] text-white rounded-2xl font-bold tracking-widest uppercase hover:bg-[#4a0a0a] transition-all transform hover:-translate-y-0.5 shadow-lg text-center">
+                            Login to Add to Cart
+                        </a>
+                    </div>
+                    @endauth
                 </div>
 
                 {{-- Product Specifications --}}
