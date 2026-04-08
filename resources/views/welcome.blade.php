@@ -8,10 +8,10 @@
         <div class="hero-slider">
             @forelse($banners as $index => $banner)
             <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index }}">
-                <div class="max-w-7xl mx-auto">
+                <div class="w-full max-w-full md:max-w-7xl mx-auto">
                     <div class="grid grid-cols-2 items-center min-h-[400px] md:min-h-[600px] lg:min-h-[700px]">
                         <!-- Left: Text -->
-                        <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-8 md:py-0 order-1 text-left">
+                        <div class="w-full px-3 md:px-6 lg:px-12 xl:px-20 py-8 md:py-0 order-1 text-left">
                             <div class="max-w-lg">
                                 <span class="text-[10px] md:text-xs font-medium text-[#D4AF37] uppercase tracking-[0.2em] md:tracking-[0.3em] mb-2 md:mb-4 block">{{ $banner->subtitle ?? 'New Arrivals' }}</span>
                                 <h1 class="text-xl sm:text-2xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-3 md:mb-6 leading-[1.1]">{{ $banner->title ?? 'Night Spring Dresses' }}</h1>
@@ -21,7 +21,7 @@
                             </div>
                         </div>
                         <!-- Right: Image -->
-                        <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-4 md:py-0 order-2">
+                        <div class="w-full px-3 md:px-6 lg:px-12 xl:px-20 py-4 md:py-0 order-2">
                             @if($banner->image)
                                 <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-[400px] md:h-[600px] lg:h-[700px] object-cover object-top">
                             @else
@@ -34,9 +34,9 @@
             @empty
             <!-- Fallback Static Slide when no banners -->
             <div class="hero-slide active" data-slide="0">
-                <div class="max-w-7xl mx-auto">
+                <div class="w-full max-w-full md:max-w-7xl mx-auto">
                     <div class="grid grid-cols-2 items-center min-h-[400px] md:min-h-[600px] lg:min-h-[700px]">
-                        <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-8 md:py-0 order-1 text-left">
+                        <div class="w-full px-3 md:px-6 lg:px-12 xl:px-20 py-8 md:py-0 order-1 text-left">
                             <div class="max-w-lg">
                                 <span class="text-[10px] md:text-xs font-medium text-[#D4AF37] uppercase tracking-[0.2em] md:tracking-[0.3em] mb-2 md:mb-4 block">New Arrivals</span>
                                 <h1 class="text-xl sm:text-2xl md:text-5xl lg:text-6xl font-bold text-[#2b0505] mb-3 md:mb-6 leading-[1.1]">Night Spring Dresses</h1>
@@ -45,7 +45,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="w-full px-4 sm:px-6 lg:px-12 xl:px-20 py-4 md:py-0 order-2">
+                        <div class="w-full px-3 md:px-6 lg:px-12 xl:px-20 py-4 md:py-0 order-2">
                             <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-[400px] md:h-[600px] lg:h-[700px] object-cover object-top">
                         </div>
                     </div>
@@ -54,7 +54,7 @@
             @endforelse
             
             <!-- Slider Indicators -->
-            <div class="absolute bottom-12 left-6 sm:left-12 lg:left-20 flex items-center gap-4 z-10">
+            <div class="absolute bottom-12 left-3 md:left-6 lg:left-20 flex items-center gap-4 z-10">
                 @if($banners && $banners->count() > 0)
                     @foreach($banners as $index => $banner)
                         <button class="indicator {{ $index === 0 ? 'active' : '' }} text-sm font-medium" data-slide="{{ $index }}" style="color: {{ $index === 0 ? '#2b0505' : 'rgba(43, 5, 5, 0.4)' }};">
@@ -75,7 +75,7 @@
 
     <!-- CATEGORY SLIDER - You Might Like -->
     <section class="w-full bg-white py-10 md:py-20">
-        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+        <div class="w-full max-w-full md:max-w-7xl mx-auto px-3 md:px-4 lg:px-8">
             <!-- Section Title -->
             <div class="text-center mb-6 md:mb-12">
                 <h2 class="text-xl md:text-3xl font-bold text-[#2b0505]">Shop by Category</h2>
@@ -167,8 +167,8 @@
     </section>
 
     <!-- FEATURED PRODUCTS SECTION -->
-    <section class="py-8 bg-[#FCF9F5]">
-        <div class="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+    <section class="py-8 bg-[#FCF9F5] w-full">
+        <div class="w-full max-w-full md:max-w-6xl mx-auto px-3 md:px-10">
             <div class="text-center mb-8">
                 <p class="text-[10px] tracking-[0.25em] uppercase text-[#D4AF37] font-bold mb-2">Featured</p>
                 <h2 class="serif text-2xl md:text-3xl text-[#2b0505] mb-2">Masterpieces</h2>

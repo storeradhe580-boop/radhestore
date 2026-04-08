@@ -1,5 +1,5 @@
-<header class="sticky top-0 z-50 border-b border-black/5 bg-white/90 backdrop-blur-md">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+<header class="sticky top-0 z-50 border-b border-black/5 bg-white/90 backdrop-blur-md w-full">
+    <div class="mx-auto w-full max-w-full md:max-w-7xl px-3 md:px-4 lg:px-8">
         <!-- Mobile Header -->
         <div class="flex md:hidden h-16 items-center justify-between">
             {{-- Hamburger Menu (Left) --}}
