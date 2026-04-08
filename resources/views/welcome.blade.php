@@ -4,7 +4,7 @@
 
 @section('content')
     <!-- HERO SLIDER SECTION -->
-    <section class="relative w-screen bg-white overflow-hidden">
+    <section class="relative w-full bg-white overflow-hidden">
         <div class="hero-slider">
             @forelse($banners as $index => $banner)
             <div class="hero-slide {{ $index === 0 ? 'active' : '' }}" data-slide="{{ $index }}">
@@ -74,90 +74,90 @@
     </section>
 
     <!-- CATEGORY SLIDER - You Might Like -->
-    <section class="w-full bg-white py-20">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="w-full bg-white py-10 md:py-20">
+        <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
             <!-- Section Title -->
-            <div class="text-center mb-12">
-                <h2 class="text-2xl md:text-3xl font-bold text-[#2b0505]">You Might Like</h2>
+            <div class="text-center mb-6 md:mb-12">
+                <h2 class="text-xl md:text-3xl font-bold text-[#2b0505]">Shop by Category</h2>
             </div>
             
             <!-- Category Slider Container -->
             <div class="relative category-slider-wrapper">
             @if($categories && $categories->count() > 4)
-                <!-- Left Arrow -->
-                <button class="cat-prev absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center text-[#2b0505] hover:bg-[#2b0505] hover:text-white hover:border-[#2b0505] transition-all duration-300">
+                <!-- Left Arrow - Hidden on mobile -->
+                <button class="cat-prev hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-md items-center justify-center text-[#2b0505] hover:bg-[#2b0505] hover:text-white hover:border-[#2b0505] transition-all duration-300">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
                 </button>
                 
-                <!-- Right Arrow -->
-                <button class="cat-next absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-md flex items-center justify-center text-[#2b0505] hover:bg-[#2b0505] hover:text-white hover:border-[#2b0505] transition-all duration-300">
+                <!-- Right Arrow - Hidden on mobile -->
+                <button class="cat-next hidden md:flex absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 bg-white border border-gray-200 rounded-full shadow-md items-center justify-center text-[#2b0505] hover:bg-[#2b0505] hover:text-white hover:border-[#2b0505] transition-all duration-300">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </button>
             @endif
                 
                 <!-- Categories Scroll -->
-                <div class="category-scroll overflow-x-auto scrollbar-hide px-8" style="scrollbar-width: none; -ms-overflow-style: none;">
-                    <div class="category-track flex gap-8 py-4 {{ $categories && $categories->count() <= 8 ? 'justify-center' : '' }}">
+                <div class="category-scroll overflow-x-auto scrollbar-hide px-2 md:px-8" style="scrollbar-width: none; -ms-overflow-style: none;">
+                    <div class="category-track flex gap-4 md:gap-8 py-2 md:py-4 {{ $categories && $categories->count() <= 8 ? 'justify-center' : '' }}">
                         @forelse($categories as $category)
-                        <a href="{{ route('category.show', $category->slug) }}" class="category-item flex-shrink-0 text-center group cursor-pointer w-28 no-underline">
-                            <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-50 mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
+                        <a href="{{ route('category.show', $category->slug) }}" class="category-item flex-shrink-0 text-center group cursor-pointer w-20 md:w-28 no-underline">
+                            <div class="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden bg-gray-50 mb-2 md:mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
                                 @if($category->image)
                                     <img src="{{ asset('storage/' . $category->image) }}" alt="{{ $category->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 @else
                                     <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=200" alt="{{ $category->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                                 @endif
                             </div>
-                            <span class="text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">{{ $category->name }}</span>
+                            <span class="text-[10px] md:text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">{{ $category->name }}</span>
                         </a>
                         @empty
                         <!-- Fallback Static Categories -->
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-28">
-                            <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-50 mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-20 md:w-28">
+                            <div class="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden bg-gray-50 mb-2 md:mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
                                 <img src="https://images.unsplash.com/photo-1596755094514-f87e34085b2c?auto=format&fit=crop&q=80&w=200" alt="Men Shirts" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
-                            <span class="text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Men Shirts</span>
+                            <span class="text-[10px] md:text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Men Shirts</span>
                         </div>
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-28">
-                            <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-50 mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-20 md:w-28">
+                            <div class="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden bg-gray-50 mb-2 md:mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
                                 <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&q=80&w=200" alt="Men Shoes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
-                            <span class="text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Men Shoes</span>
+                            <span class="text-[10px] md:text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Men Shoes</span>
                         </div>
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-28">
-                            <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-50 mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-20 md:w-28">
+                            <div class="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden bg-gray-50 mb-2 md:mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
                                 <img src="https://images.unsplash.com/photo-1595777457583-95e059d581b8?auto=format&fit=crop&q=80&w=200" alt="Women Dresses" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
-                            <span class="text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Women Dresses</span>
+                            <span class="text-[10px] md:text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Women Dresses</span>
                         </div>
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-28">
-                            <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-50 mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-20 md:w-28">
+                            <div class="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden bg-gray-50 mb-2 md:mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
                                 <img src="https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&q=80&w=200" alt="Kids Tops" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
-                            <span class="text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Kids Tops</span>
+                            <span class="text-[10px] md:text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Kids Tops</span>
                         </div>
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-28">
-                            <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-50 mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-20 md:w-28">
+                            <div class="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden bg-gray-50 mb-2 md:mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
                                 <img src="https://images.unsplash.com/photo-1564257631407-4deb1f99d992?auto=format&fit=crop&q=80&w=200" alt="Women Tops" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
-                            <span class="text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Women Tops</span>
+                            <span class="text-[10px] md:text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Women Tops</span>
                         </div>
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-28">
-                            <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-50 mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-20 md:w-28">
+                            <div class="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden bg-gray-50 mb-2 md:mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
                                 <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?auto=format&fit=crop&q=80&w=200" alt="Women Pants" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
-                            <span class="text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Women Pants</span>
+                            <span class="text-[10px] md:text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Women Pants</span>
                         </div>
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-28">
-                            <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-50 mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-20 md:w-28">
+                            <div class="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden bg-gray-50 mb-2 md:mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
                                 <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=200" alt="Women Clothes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
-                            <span class="text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Women Clothes</span>
+                            <span class="text-[10px] md:text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Women Clothes</span>
                         </div>
-                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-28">
-                            <div class="w-28 h-28 rounded-full overflow-hidden bg-gray-50 mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
+                        <div class="category-item flex-shrink-0 text-center group cursor-pointer w-20 md:w-28">
+                            <div class="w-20 h-20 md:w-28 md:h-28 rounded-full overflow-hidden bg-gray-50 mb-2 md:mb-3 border border-gray-100 group-hover:border-[#D4AF37] transition-all duration-300">
                                 <img src="https://images.unsplash.com/photo-1542272604-787c3835535d?auto=format&fit=crop&q=80&w=200" alt="Men Jeans" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                             </div>
-                            <span class="text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Men Jeans</span>
+                            <span class="text-[10px] md:text-xs font-medium text-gray-700 group-hover:text-[#D4AF37] transition-colors">Men Jeans</span>
                         </div>
                         @endforelse
                     </div>
