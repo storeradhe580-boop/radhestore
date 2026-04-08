@@ -21,11 +21,11 @@
                             </div>
                         </div>
                         <!-- Right: Image -->
-                        <div class="w-full px-3 md:px-6 lg:px-12 xl:px-20 py-4 md:py-0 order-2">
+                        <div class="w-full px-3 md:px-6 lg:px-12 xl:px-20 py-4 md:py-0 order-2 flex items-center justify-center">
                             @if($banner->image)
-                                <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-[400px] md:h-[600px] lg:h-[700px] object-cover object-top">
+                                <img src="{{ asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-auto max-h-[400px] md:max-h-[600px] lg:max-h-[700px] object-contain">
                             @else
-                                <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-[400px] md:h-[600px] lg:h-[700px] object-cover object-top">
+                                <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-auto max-h-[400px] md:max-h-[600px] lg:max-h-[700px] object-contain">
                             @endif
                         </div>
                     </div>
@@ -45,8 +45,8 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="w-full px-3 md:px-6 lg:px-12 xl:px-20 py-4 md:py-0 order-2">
-                            <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-[400px] md:h-[600px] lg:h-[700px] object-cover object-top">
+                        <div class="w-full px-3 md:px-6 lg:px-12 xl:px-20 py-4 md:py-0 order-2 flex items-center justify-center">
+                            <img src="{{ asset('images/default-slider.jpg') }}" alt="Fashion Model" class="w-full h-auto max-h-[400px] md:max-h-[600px] lg:max-h-[700px] object-contain">
                         </div>
                     </div>
                 </div>
