@@ -170,7 +170,7 @@
                                 </div>
                             </div>
                             
-                            <a href="{{ route('checkout.index') }}" class="w-full bg-[#D4AF37] text-[#2b0505] py-6 rounded-2xl text-xs font-bold tracking-[0.3em] uppercase hover:bg-white transition-all transform hover:-translate-y-1 shadow-xl active:scale-95 flex items-center justify-center gap-4 group no-underline">
+                            <a href="{{ route('payment.checkout') }}" class="w-full bg-[#D4AF37] text-[#2b0505] py-6 rounded-2xl text-xs font-bold tracking-[0.3em] uppercase hover:bg-white transition-all transform hover:-translate-y-1 shadow-xl active:scale-95 flex items-center justify-center gap-4 group no-underline">
                                 Proceed to Checkout
                                 <i class="bi bi-arrow-right transition-transform group-hover:translate-x-1"></i>
                             </a>

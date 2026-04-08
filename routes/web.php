@@ -19,6 +19,8 @@ use App\Http\Controllers\OrderTrackController;
 use App\Http\Controllers\ImageUploadController;
 use App\Http\Controllers\Admin\SliderController as AdminSliderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -37,6 +39,15 @@ Route::get('/order-receipt/{id}', [CheckoutController::class, 'receipt'])->name(
 Route::get('/order/track', [OrderTrackController::class, 'index'])->name('order.track');
 Route::get('/track-order', [OrderTrackController::class, 'showTrackForm'])->name('order.track.form');
 Route::post('/track-order', [OrderTrackController::class, 'trackOrder'])->name('order.track.submit');
+
+// Razorpay Payment Routes
+Route::middleware('auth')->group(function () {
+    Route::get('/payment/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
+    Route::post('/payment/order/create', [PaymentController::class, 'createOrder'])->name('payment.order.create');
+    Route::post('/payment/verify', [PaymentController::class, 'verifyPayment'])->name('payment.verify');
+    Route::post('/payment/failed', [PaymentController::class, 'paymentFailed'])->name('payment.failed');
+    Route::get('/payment/success/{order}', [PaymentController::class, 'success'])->name('payment.success');
+});
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard')->middleware('auth');
 

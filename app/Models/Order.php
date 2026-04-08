@@ -8,10 +8,16 @@ class Order extends Model
 {
     protected $fillable = [
         'user_id',
+        'order_number',
         'email',
         'total_amount',
         'status',
+        'order_status',
         'shipping_address',
+        'shipping_city',
+        'shipping_state',
+        'shipping_pincode',
+        'shipping_phone',
         'payment_method',
         'payment_id',
         'payment_status',
@@ -21,7 +27,6 @@ class Order extends Model
         'placed_at',
         'processing_at',
         'shipped_at',
-        'delivered_at',
     ];
 
     public function user()
