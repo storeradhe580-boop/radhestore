@@ -105,6 +105,15 @@
 @push('scripts')
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
+// Helper function to show alerts (uses SweetAlert if available, otherwise alert)
+function showAlert(options) {
+    if (typeof Swal !== 'undefined') {
+        Swal.fire(options);
+    } else {
+        alert(options.title + ': ' + options.text);
+    }
+}
+
 document.getElementById('pay-btn').addEventListener('click', async function() {
     const btn = this;
     btn.disabled = true;
@@ -120,10 +129,20 @@ document.getElementById('pay-btn').addEventListener('click', async function() {
             }
         });
         
+        // Check if response is OK before parsing JSON
+        if (!orderResponse.ok) {
+            const text = await orderResponse.text();
+            throw new Error('Server error: ' + orderResponse.status + ' - ' + text.substring(0, 100));
+        }
+        
         const orderData = await orderResponse.json();
         
         if (orderData.error) {
             throw new Error(orderData.error);
+        }
+        
+        if (!orderData.success || !orderData.order_id) {
+            throw new Error('Invalid order response from server');
         }
         
         // Razorpay checkout options
@@ -135,38 +154,59 @@ document.getElementById('pay-btn').addEventListener('click', async function() {
             description: 'Order Payment',
             order_id: orderData.order_id,
             handler: async function(response) {
-                // Verify payment
-                const verifyResponse = await fetch('{{ route("payment.verify") }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        razorpay_payment_id: response.razorpay_payment_id,
-                        razorpay_order_id: response.razorpay_order_id,
-                        razorpay_signature: response.razorpay_signature,
-                        shipping_address: document.getElementById('shipping_address').value,
-                        shipping_city: document.getElementById('shipping_city').value,
-                        shipping_state: document.getElementById('shipping_state').value,
-                        shipping_pincode: document.getElementById('shipping_pincode').value,
-                        shipping_phone: document.getElementById('shipping_phone').value
-                    })
-                });
-                
-                const verifyData = await verifyResponse.json();
-                
-                if (verifyData.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Payment Successful!',
-                        text: 'Your order has been placed. Order ID: ' + verifyData.order_id,
-                        confirmButtonColor: '#2b0505'
-                    }).then(() => {
-                        window.location.href = '{{ route("payment.success", ["order" => "ORDER_PLACEHOLDER"]) }}'.replace('ORDER_PLACEHOLDER', verifyData.order_id);
+                try {
+                    // Verify payment
+                    const verifyResponse = await fetch('{{ route("payment.verify") }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_signature: response.razorpay_signature,
+                            shipping_address: document.getElementById('shipping_address').value,
+                            shipping_city: document.getElementById('shipping_city').value,
+                            shipping_state: document.getElementById('shipping_state').value,
+                            shipping_pincode: document.getElementById('shipping_pincode').value,
+                            shipping_phone: document.getElementById('shipping_phone').value
+                        })
                     });
-                } else {
-                    throw new Error(verifyData.error || 'Payment verification failed');
+                    
+                    // Check if response is OK before parsing JSON
+                    if (!verifyResponse.ok) {
+                        const text = await verifyResponse.text();
+                        throw new Error('Verification failed: ' + verifyResponse.status + ' - ' + text.substring(0, 100));
+                    }
+                    
+                    const verifyData = await verifyResponse.json();
+                    
+                    if (verifyData.success) {
+                        showAlert({
+                            icon: 'success',
+                            title: 'Payment Successful!',
+                            text: 'Your order has been placed. Order ID: ' + verifyData.order_id,
+                            confirmButtonColor: '#2b0505'
+                        });
+                        setTimeout(() => {
+                            window.location.href = '{{ route("payment.success", ["order" => "ORDER_PLACEHOLDER"]) }}'.replace('ORDER_PLACEHOLDER', verifyData.order_id);
+                        }, 1500);
+                    } else {
+                        showAlert({
+                            icon: 'error',
+                            title: 'Payment Failed',
+                            text: verifyData.error || 'Payment verification failed',
+                            confirmButtonColor: '#2b0505'
+                        });
+                    }
+                } catch (error) {
+                    showAlert({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error.message,
+                        confirmButtonColor: '#2b0505'
+                    });
                 }
             },
             prefill: {
@@ -188,7 +228,7 @@ document.getElementById('pay-btn').addEventListener('click', async function() {
         const rzp = new Razorpay(options);
         
         rzp.on('payment.failed', function(response) {
-            Swal.fire({
+            showAlert({
                 icon: 'error',
                 title: 'Payment Failed',
                 text: response.error.description,
@@ -201,7 +241,7 @@ document.getElementById('pay-btn').addEventListener('click', async function() {
         rzp.open();
         
     } catch (error) {
-        Swal.fire({
+        showAlert({
             icon: 'error',
             title: 'Error',
             text: error.message,

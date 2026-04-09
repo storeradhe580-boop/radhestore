@@ -39,24 +39,33 @@ class PaymentController extends Controller
      */
     public function createOrder(Request $request)
     {
-        $cart = session()->get('cart', []);
-        
-        if (empty($cart)) {
-            return response()->json(['error' => 'Cart is empty'], 400);
-        }
-        
-        $total = 0;
-        foreach ($cart as $item) {
-            $total += $item['price'] * $item['quantity'];
-        }
-        
-        $amount = $total * 100; // Convert to paise
-        
         try {
-            $api = new \Razorpay\Api\Api(
-                env('RAZORPAY_KEY_ID', 'rzp_test_your_key_here'),
-                env('RAZORPAY_KEY_SECRET', 'your_secret_here')
-            );
+            $cart = session()->get('cart', []);
+            
+            if (empty($cart)) {
+                return response()->json(['error' => 'Cart is empty'], 400);
+            }
+            
+            $total = 0;
+            foreach ($cart as $item) {
+                $total += $item['price'] * $item['quantity'];
+            }
+            
+            $amount = $total * 100; // Convert to paise
+            
+            // Check if Razorpay SDK is available
+            if (!class_exists('\Razorpay\Api\Api')) {
+                return response()->json(['error' => 'Razorpay SDK not installed. Run: composer require razorpay/razorpay'], 500);
+            }
+            
+            $keyId = env('RAZORPAY_KEY_ID');
+            $keySecret = env('RAZORPAY_KEY_SECRET');
+            
+            if (empty($keyId) || $keyId === 'rzp_test_your_key_here') {
+                return response()->json(['error' => 'Razorpay API key not configured'], 500);
+            }
+            
+            $api = new \Razorpay\Api\Api($keyId, $keySecret);
             
             $orderData = [
                 'receipt' => 'order_' . Str::random(10),
@@ -68,10 +77,11 @@ class PaymentController extends Controller
             $razorpayOrder = $api->order->create($orderData);
             
             return response()->json([
+                'success' => true,
                 'order_id' => $razorpayOrder['id'],
                 'amount' => $amount,
                 'currency' => 'INR',
-                'key' => env('RAZORPAY_KEY_ID', 'rzp_test_your_key_here')
+                'key' => $keyId
             ]);
             
         } catch (\Exception $e) {
@@ -84,17 +94,34 @@ class PaymentController extends Controller
      */
     public function verifyPayment(Request $request)
     {
-        $request->validate([
-            'razorpay_payment_id' => 'required',
-            'razorpay_order_id' => 'required',
-            'razorpay_signature' => 'required'
-        ]);
-        
         try {
-            $api = new \Razorpay\Api\Api(
-                env('RAZORPAY_KEY_ID', 'rzp_test_your_key_here'),
-                env('RAZORPAY_KEY_SECRET', 'your_secret_here')
-            );
+            // Manual validation to always return JSON
+            if (!$request->has('razorpay_payment_id') || !$request->has('razorpay_order_id') || !$request->has('razorpay_signature')) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Missing required payment parameters'
+                ], 400);
+            }
+            
+            // Check if Razorpay SDK is available
+            if (!class_exists('\Razorpay\Api\Api')) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Razorpay SDK not installed'
+                ], 500);
+            }
+            
+            $keyId = env('RAZORPAY_KEY_ID');
+            $keySecret = env('RAZORPAY_KEY_SECRET');
+            
+            if (empty($keyId) || empty($keySecret)) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Razorpay API keys not configured'
+                ], 500);
+            }
+            
+            $api = new \Razorpay\Api\Api($keyId, $keySecret);
             
             // Verify signature
             $attributes = [
@@ -105,11 +132,16 @@ class PaymentController extends Controller
             
             $api->utility->verifyPaymentSignature($attributes);
             
-            // Get payment details
-            $payment = $api->payment->fetch($request->razorpay_payment_id);
-            
             // Create order in database
             $cart = session()->get('cart', []);
+            
+            if (empty($cart)) {
+                return response()->json([
+                    'success' => false,
+                    'error' => 'Cart is empty'
+                ], 400);
+            }
+            
             $total = 0;
             foreach ($cart as $item) {
                 $total += $item['price'] * $item['quantity'];
