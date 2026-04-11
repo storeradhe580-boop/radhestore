@@ -212,4 +212,69 @@ class PaymentController extends Controller
         
         return view('payment.success', compact('order'));
     }
+
+    /**
+     * Show simple test payment page
+     */
+    public function testPayment()
+    {
+        return view('payment.test');
+    }
+
+    /**
+     * Create simple Razorpay order (for testing)
+     */
+    public function createOrderSimple(Request $request)
+    {
+        try {
+            // Get amount from request or use default
+            $amount = $request->input('amount', 100);
+            $amountInPaise = $amount * 100; // Convert to paise
+
+            // Get API keys from .env
+            $keyId = env('RAZORPAY_KEY') ?? env('RAZORPAY_KEY_ID');
+            $keySecret = env('RAZORPAY_SECRET') ?? env('RAZORPAY_KEY_SECRET');
+
+            // Validate API keys
+            if (empty($keyId) || empty($keySecret)) {
+                return response()->json([
+                    'error' => 'API keys not configured. Add RAZORPAY_KEY and RAZORPAY_SECRET to .env'
+                ], 500);
+            }
+
+            // Check if SDK is available
+            if (!class_exists('Razorpay\Api\Api')) {
+                return response()->json([
+                    'error' => 'Razorpay SDK not installed. Run: composer require razorpay/razorpay'
+                ], 500);
+            }
+
+            // Initialize Razorpay API
+            $api = new \Razorpay\Api\Api($keyId, $keySecret);
+
+            // Create order
+            $orderData = [
+                'receipt' => 'test_' . Str::random(8),
+                'amount' => $amountInPaise,
+                'currency' => 'INR',
+                'payment_capture' => 1
+            ];
+
+            $razorpayOrder = $api->order->create($orderData);
+
+            // Return JSON response
+            return response()->json([
+                'success' => true,
+                'order_id' => $razorpayOrder['id'],
+                'amount' => $amountInPaise,
+                'currency' => 'INR',
+                'key' => $keyId
+            ]);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to create order: ' . $e->getMessage()
+            ], 500);
+        }
+    }
 }

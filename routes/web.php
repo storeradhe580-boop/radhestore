@@ -40,7 +40,11 @@ Route::get('/order/track', [OrderTrackController::class, 'index'])->name('order.
 Route::get('/track-order', [OrderTrackController::class, 'showTrackForm'])->name('order.track.form');
 Route::post('/track-order', [OrderTrackController::class, 'trackOrder'])->name('order.track.submit');
 
-// Razorpay Payment Routes
+// Razorpay Simple Test Routes (no auth required for testing)
+Route::get('/payment/test', [PaymentController::class, 'testPayment'])->name('payment.test');
+Route::post('/create-order', [PaymentController::class, 'createOrderSimple'])->name('payment.create.simple');
+
+// Razorpay Payment Routes (authenticated)
 Route::middleware('auth')->group(function () {
     Route::get('/payment/checkout', [PaymentController::class, 'checkout'])->name('payment.checkout');
     Route::post('/payment/order/create', [PaymentController::class, 'createOrder'])->name('payment.order.create');
