@@ -34,6 +34,8 @@ RUN mkdir -p storage/framework/cache \
 
 RUN chmod -R 777 storage bootstrap/cache
 
+# Install Composer dependencies including Razorpay
+RUN composer require razorpay/razorpay:^2.9 --no-interaction --no-dev --optimize-autoloader --ignore-platform-reqs
 RUN composer install --no-dev --optimize-autoloader --ignore-platform-reqs
 
 # 🔥 IMPORTANT: Render PORT support

@@ -7,7 +7,21 @@ echo "🚀 Starting Laravel build process..."
 
 # Install Composer dependencies (production only)
 echo "📦 Installing Composer dependencies..."
+
+# Ensure razorpay is installed (in case composer.lock is outdated)
+composer require razorpay/razorpay:^2.9 --no-interaction --no-dev --optimize-autoloader --update-no-dev
+
+# Install remaining dependencies
 composer install --no-dev --optimize-autoloader
+
+# Verify Razorpay is installed
+echo "🔍 Verifying Razorpay installation..."
+if composer show razorpay/razorpay > /dev/null 2>&1; then
+    echo "✅ Razorpay SDK installed successfully"
+else
+    echo "❌ Razorpay SDK installation failed"
+    exit 1
+fi
 
 # Clear all caches first (prevents stale cache issues)
 echo "🧹 Clearing all caches..."
