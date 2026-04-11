@@ -27,6 +27,20 @@
         <div id="status" class="mt-6 text-center hidden">
             <p class="text-sm text-gray-600"></p>
         </div>
+        
+        <!-- Payment Methods Info -->
+        <div class="mt-6 p-4 bg-gray-50 rounded-lg">
+            <p class="text-xs text-gray-500 mb-2 font-semibold">Available Payment Methods:</p>
+            <div class="flex flex-wrap gap-2 justify-center">
+                <span class="px-2 py-1 bg-white rounded text-xs border border-gray-200">💳 Card</span>
+                <span class="px-2 py-1 bg-white rounded text-xs border border-gray-200">📱 UPI (GPay, PhonePe, Paytm)</span>
+                <span class="px-2 py-1 bg-white rounded text-xs border border-gray-200">🏦 Netbanking</span>
+                <span class="px-2 py-1 bg-white rounded text-xs border border-gray-200">👛 Wallet</span>
+            </div>
+            <p class="text-xs text-gray-400 mt-2 text-center">
+                💡 Note: UPI may show limited options in test mode. Use live keys for full UPI support.
+            </p>
+        </div>
     </div>
 </div>
 @endsection
@@ -60,7 +74,7 @@ document.getElementById('pay-btn').addEventListener('click', async function() {
             throw new Error(data.error || 'Failed to create order');
         }
         
-        // Step 2: Open Razorpay checkout
+        // Step 2: Open Razorpay checkout with UPI enabled
         const options = {
             key: data.key,
             amount: data.amount,
@@ -68,6 +82,24 @@ document.getElementById('pay-btn').addEventListener('click', async function() {
             name: 'Radhe Store',
             description: 'Test Payment',
             order_id: data.order_id,
+            // Enable all payment methods including UPI
+            method: {
+                upi: {
+                    flow: 'collect', // or 'intent' for intent flow
+                    apps: ['google_pay', 'phonepe', 'paytm', 'bhim', 'amazon_pay']
+                },
+                card: true,
+                netbanking: true,
+                wallet: true,
+                emi: false,
+                paylater: false
+            },
+            // UPI specific configuration
+            config: {
+                display: {
+                    language: 'en'
+                }
+            },
             handler: function(response) {
                 // Payment successful
                 statusDiv.innerHTML = `
@@ -88,10 +120,17 @@ document.getElementById('pay-btn').addEventListener('click', async function() {
             prefill: {
                 name: '{{ Auth::user()->name ?? "Customer" }}',
                 email: '{{ Auth::user()->email ?? "" }}',
-                contact: '{{ Auth::user()->phone ?? "" }}'
+                contact: '{{ Auth::user()->phone ?? "" }}',
+                method: 'upi', // Prefer UPI as default method
+                vpa: '' // User can enter their UPI ID
+            },
+            notes: {
+                address: 'Radhe Store Payment',
+                merchant_order_id: data.order_id
             },
             theme: {
-                color: '#2b0505'
+                color: '#2b0505',
+                backdrop_color: '#000000' // Darker backdrop for better visibility
             },
             modal: {
                 ondismiss: function() {

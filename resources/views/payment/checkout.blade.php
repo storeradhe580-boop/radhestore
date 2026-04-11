@@ -145,7 +145,7 @@ document.getElementById('pay-btn').addEventListener('click', async function() {
             throw new Error('Invalid order response from server');
         }
         
-        // Razorpay checkout options
+        // Razorpay checkout options with UPI enabled
         const options = {
             key: orderData.key,
             amount: orderData.amount,
@@ -153,6 +153,27 @@ document.getElementById('pay-btn').addEventListener('click', async function() {
             name: 'Radhe Store',
             description: 'Order Payment',
             order_id: orderData.order_id,
+            // Enable all payment methods including UPI
+            method: {
+                upi: {
+                    flow: 'collect',
+                    apps: ['google_pay', 'phonepe', 'paytm', 'bhim', 'amazon_pay']
+                },
+                card: true,
+                netbanking: true,
+                wallet: true,
+                emi: false,
+                paylater: false
+            },
+            config: {
+                display: {
+                    language: 'en',
+                    hide: [
+                        { method: 'emi' },
+                        { method: 'paylater' }
+                    ]
+                }
+            },
             handler: async function(response) {
                 try {
                     // Verify payment
@@ -212,10 +233,16 @@ document.getElementById('pay-btn').addEventListener('click', async function() {
             prefill: {
                 name: '{{ Auth::user()->name }}',
                 email: '{{ Auth::user()->email }}',
-                contact: '{{ Auth::user()->phone ?? "" }}'
+                contact: '{{ Auth::user()->phone ?? "" }}',
+                method: 'upi' // Prefer UPI as default
+            },
+            notes: {
+                address: 'Radhe Store Order',
+                merchant_order_id: orderData.order_id
             },
             theme: {
-                color: '#2b0505'
+                color: '#2b0505',
+                backdrop_color: '#000000'
             },
             modal: {
                 ondismiss: function() {
